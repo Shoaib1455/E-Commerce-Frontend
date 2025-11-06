@@ -1,0 +1,85 @@
+<nb-layout>
+    <nb-layout-column>
+        <div class="container mt-4">
+            <nb-card class="shadow-sm rounded-3">
+                <nb-card-header class="bg-light">
+                    <h5 class="mb-0 text-primary fw-semibold">Add New Product</h5>
+                </nb-card-header>
+
+                <nb-card-body>
+                    <form (ngSubmit)="onSubmit()" #productForm="ngForm" class="row g-3">
+
+                        <!-- Product Name -->
+                        <div class="col-md-6">
+                            <label for="productName" class="form-label fw-medium">Product Name</label>
+                            <input nbInput fullWidth type="text" id="productName" name="productName"
+                                class="form-control" placeholder="Enter product name" [(ngModel)]="product.productName"
+                                required />
+                        </div>
+
+                        <!-- Price -->
+                        <div class="col-md-6">
+                            <label for="price" class="form-label fw-medium">Price (PKR)</label>
+                            <input nbInput fullWidth type="number" id="price" name="price" class="form-control"
+                                placeholder="Enter price" [(ngModel)]="product.price" required />
+                        </div>
+
+                        <!-- Category -->
+                        <div class="col-md-6">
+                            <label for="category" class="form-label fw-medium">Category</label>
+                            <select nbInput fullWidth id="category" name="category" class="form-select"
+                                [(ngModel)]="product.category" required>
+                                <option value="" disabled selected>Select category</option>
+                                <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+                            </select>
+                        </div>
+
+                        <!-- Stock Quantity -->
+                        <div class="col-md-6">
+                            <label for="stock" class="form-label fw-medium">Product Sku</label>
+                            <input nbInput fullWidth type="text" id="stock" name="stock" class="form-control"
+                                placeholder="Enter available stock" [(ngModel)]="product.sku" required />
+                        </div>
+
+                        <!-- Description -->
+                        <div class="col-12">
+                            <label for="description" class="form-label fw-medium">Description</label>
+                            <textarea nbInput fullWidth id="description" name="description" class="form-control"
+                                rows="3" placeholder="Enter product description"
+                                [(ngModel)]="product.description"></textarea>
+                        </div>
+
+                        <!-- Image Upload -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-medium">Product Image</label>
+                            <input type="file" accept="image/*" class="form-control"
+                                (change)="onFileSelected($event)" />
+                        </div>
+
+                        <!-- Image Preview -->
+                        <div class="col-md-6 text-center" *ngIf="imagePreview">
+                            <label class="form-label fw-medium">Preview</label>
+                            <div class="border rounded-3 p-2">
+                                <img [src]="imagePreview" alt="Preview" class="img-fluid rounded-3"
+                                    style="max-height: 150px;" />
+                            </div>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="col-12 text-end mt-3">
+                            <button nbButton status="primary" type="submit" [disabled]="!productForm.valid">
+                                <nb-icon icon="plus-circle-outline"></nb-icon>
+                                Add Product
+                            </button>
+                            <button nbButton status="basic" type="button" class="ms-2" (click)="onCancel()">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </nb-card-body>
+            </nb-card>
+        </div>
+    </nb-layout-column>
+
+</nb-layout>
+<router-outlet></router-outlet>

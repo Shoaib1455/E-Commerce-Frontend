@@ -1,0 +1,64 @@
+<nb-layout>
+
+
+    <nb-card-body class="d-flex flex-column justify-content-end">
+        <div class="d-flex gap-2">
+            <button nbButton status="primary">Add to cart</button>
+            <button nbButton ghost>View</button>
+        </div>
+    </nb-card-body>
+
+
+
+
+
+
+    <nb-layout-column>
+        <section class="profile-details">
+            <div class="detail"><label>Email</label>
+                <div class="value">{{ userProfile.email || '—' }}</div>
+            </div>
+            <div class="detail"><label>Role</label>
+                <div class="value">{{ userProfile.role || '—' }}</div>
+            </div>
+        </section>
+    </nb-layout-column>
+
+
+    <!-- RIGHT SIDEBAR — Cart Drawer -->
+    <nb-sidebar tag="right" state="collapsed" right style="width: 360px;">
+        <div class="p-3 cart-drawer">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h5 class="m-0">My Cart</h5>
+                <button nbButton ghost (click)="closeCart()"><nb-icon icon="close-outline"></nb-icon></button>
+            </div>
+
+
+            <div *ngIf="cart.length === 0" class="text-center py-5">
+                <p>Your cart is empty</p>
+            </div>
+
+
+            <div *ngFor="let c of cart" class="cart-item d-flex align-items-center mb-3">
+                <img [src]="c.product.img" class="me-2 cart-item-img" alt="" />
+                <div class="flex-grow-1">
+                    <div>{{ c.product.title }}</div>
+                    <div class="text-muted small">Qty: {{ c.qty }}</div>
+                </div>
+                <div class="text-end">Rs. {{ c.product.price * c.qty }}</div>
+            </div>
+
+
+            <div class="mt-3 border-top pt-3">
+                <div class="d-flex justify-content-between mb-2">
+                    <strong>Subtotal</strong>
+                    <strong>Rs. {{ total() }}</strong>
+                </div>
+                <button nbButton status="success" fullWidth>Checkout</button>
+            </div>
+        </div>
+    </nb-sidebar>
+
+
+</nb-layout>
+```

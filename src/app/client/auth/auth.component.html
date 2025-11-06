@@ -1,0 +1,22 @@
+<nb-layout>
+    <nb-layout-column>
+        <div class="center-container">
+            <nb-card class="login-card">
+                <nb-card-header>
+                    Log In
+                </nb-card-header>
+                <nb-card-body class="login-form">
+                    <input nbInput fullWidth type="email" placeholder="Email" class="form-input"
+                        [(ngModel)]="userdata.email" />
+                    <input nbInput fullWidth type="password" placeholder="Password" class="form-input"
+                        [(ngModel)]="userdata.PasswordN" />
+                    <input nbInput fullWidth type="text" placeholder="Role" class="form-input"
+                        [(ngModel)]="userdata.role" />
+                    <button nbButton fullWidth status="primary" (click)="login()" class="login-button">
+                        Sign In
+                    </button>
+                </nb-card-body>
+            </nb-card>
+        </div>
+    </nb-layout-column>
+</nb-layout>

@@ -1,0 +1,12 @@
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+
+}
+
+/* Remove default padding from the main layout column when class applied */
+nb-layout-column.no-padding {
+    padding: 0 !important;
+}
