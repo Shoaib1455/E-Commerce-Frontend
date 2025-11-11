@@ -1,0 +1,74 @@
+// In home.component.scss
+
+// Styling for the Product Grid
+.product-grid {
+    display: grid;
+    // Creates a responsive grid: 
+    // auto-fit tries to fit as many columns as possible.
+    // minmax(200px, 1fr) ensures each column is at least 200px wide.
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    padding-top: 1rem;
+}
+
+.home-page-container {
+    padding: 1.5rem;
+}
+
+nb-list-item {
+    display: flex !important;
+}
+
+// Styling for an individual Product Card
+.product-card {
+    cursor: pointer;
+    transition: transform 0.2s;
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-image-container {
+        height: 180px;
+        background-color: var(--background-basic-color-3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .product-name {
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        height: 2.4rem;
+        /* Fixed height for 2 lines of text */
+        overflow: hidden;
+    }
+
+    .pricing-details {
+        display: flex;
+        align-items: baseline;
+        gap: 0.5rem;
+    }
+
+    .current-price {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--color-danger-500);
+        /* Use a strong color for the price */
+    }
+
+    .deleted-price {
+        font-size: 0.8rem;
+        text-decoration: line-through;
+        /* Strikethrough for original price */
+        color: var(--text-hint-color);
+    }
+
+    .discount-badge {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--color-success-500);
+    }
+}

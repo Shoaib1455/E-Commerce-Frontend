@@ -1,0 +1,93 @@
+<nb-layout>
+
+    <nb-layout-header class="header-row">
+        <div class="header-content">
+
+            <h1 class="store-title text-danger"> E-Commerce </h1>
+
+
+            <nav class="main-navigation">
+                <a nbButton appearance="ghost" routerLink="/about">Home</a>
+                <a nbButton appearance="ghost" routerLink="/products">Products</a>
+                <a nbButton appearance="ghost" routerLink="/about">About</a>
+                <a nbButton appearance="ghost" routerLink="/about">Contact</a>
+
+            </nav>
+
+
+            <div class="right-controls">
+                <!-- <button nbButton status="basic" routerLink="/login" size="small">
+                    Sign In
+                </button>
+                <button nbButton status="primary" routerLink="/admin" size="small" class="admin-btn">
+                    Go to Admin
+                </button> -->
+                <button nbButton appearance="ghost" (click)="openSearchBar()" size="medium" aria-label="Search">
+                    <nb-icon icon="search-outline"></nb-icon>
+                </button>
+
+                <button nbButton appearance="ghost" size="medium" routerLink="/account/cart" aria-label="Shopping Cart">
+                    <nb-icon icon="shopping-cart-outline"></nb-icon>
+                    <span class="cart-badge">3</span>
+                </button>
+
+                <button nbButton appearance="ghost" size="medium" routerLink="/account/profile"
+                    aria-label="User Account">
+                    <nb-icon icon="person-outline"></nb-icon>
+                </button>
+            </div>
+        </div>
+    </nb-layout-header>
+
+    <div class="full-width-search-bar-wrapper" *ngIf="isSearchBarVisible" [@slideDown]>
+        <div class="full-width-search-bar">
+            <input type="text" class="search-bar" nbInput placeholder="What are you looking for?"
+                [(ngModel)]="searchQuery" name="search" autofocus>
+
+            <button nbButton status="primary" (click)="performSearch()">
+                <nb-icon icon="search-outline"></nb-icon> Search
+            </button>
+
+            <button nbButton appearance="ghost" (click)="closeSearchBar()" aria-label="Close Search">
+                <nb-icon icon="close-outline"></nb-icon>
+            </button>
+        </div>
+    </div>
+
+    <nb-layout-column>
+        <div class="full-width-search-bar-wrapper" *ngIf="isSearchBarVisible" [@slideDown]>
+            <div class="full-width-search-bar">
+                <input type="text" nbInput placeholder="What are you looking for?" [(ngModel)]="searchQuery"
+                    name="search" autofocus>
+
+                <button nbButton status="primary" (click)="performSearch()">
+                    <nb-icon icon="search-outline"></nb-icon> Search
+                </button>
+
+                <button nbButton appearance="ghost" (click)="closeSearchBar()" aria-label="Close Search">
+                    <nb-icon icon="close-outline"></nb-icon>
+                </button>
+            </div>
+        </div>
+        <!-- <form (ngSubmit)="performSearch()">
+            <nb-form-field>
+                <nb-icon nbPrefix icon="search-outline"></nb-icon>
+
+                <input type="text" nbInput placeholder="What are you looking for?" [(ngModel)]="searchQuery"
+                    name="search" autofocus>
+
+                <button type="button" nbSuffix nbButton ghost size="small" (click)="closeSearchOverlay()"
+                    aria-label="Close Search">
+                    <nb-icon icon="close-outline"></nb-icon>
+                </button>
+            </nb-form-field>
+        </form> -->
+        <!-- -->
+        <router-outlet></router-outlet>
+    </nb-layout-column>
+
+    <nb-layout-footer>
+        <p>&copy; 2025 E-Commerce Site</p>
+    </nb-layout-footer>
+
+</nb-layout>

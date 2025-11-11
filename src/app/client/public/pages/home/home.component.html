@@ -1,0 +1,77 @@
+<div class="home-page-container">
+
+    <div class="top-section-grid">
+
+        <nb-card class="categories-card">
+            <nb-card-header>🛒 Product Categories</nb-card-header>
+            <nb-list class="category-list">
+
+                <nb-list-item>
+                    <div class="category-item-content" routerLink="/products/electronics">
+                        <nb-icon icon="tv-outline" class="category-icon"></nb-icon>
+                        <span class="category-name">Electronics</span>
+                    </div>
+                </nb-list-item>
+
+                <nb-list-item>
+                    <div class="category-item-content" routerLink="/products/fashion">
+                        <nb-icon icon="shopping-bag-outline" class="category-icon"></nb-icon>
+                        <span class="category-name">Fashion</span>
+                    </div>
+                </nb-list-item>
+            </nb-list>
+        </nb-card>
+
+        <nb-card class="carousel-card">
+            <div class="carousel-placeholder">Main Promotional Banner Area</div>
+        </nb-card>
+
+        <div class="service-cards-group">
+            <nb-card size="small"> Top Vouchers</nb-card>
+            <nb-card size="small"> Flash Sale</nb-card>
+            <nb-card size="small"> Coin Rewards</nb-card>
+        </div>
+
+    </div>
+
+    <hr>
+
+    <div class="product-feed-section">
+        <h2 class="section-title"> Recommended for You</h2>
+
+        <div class="product-grid">
+
+            <nb-card class="product-card">
+                <div class="product-image-container">
+
+                </div>
+
+                <nb-card-body>
+                    <p class="product-name">
+                        Stylish Modern Running Shoes for Men
+                    </p>
+
+                    <div class="pricing-details">
+
+                        <span class="current-price text-danger">$79.99</span>
+
+                        <span class="deleted-price text-hint">$109.99</span>
+
+                        <span class="discount-badge text-success">-27%</span>
+                    </div>
+                </nb-card-body>
+
+                <nb-card-footer>
+                    <button nbButton status="primary" size="small">Add to Cart</button>
+                </nb-card-footer>
+            </nb-card>
+
+            <nb-card class="product-card">...</nb-card>
+            <nb-card class="product-card">...</nb-card>
+            <nb-card class="product-card">...</nb-card>
+            <nb-card class="product-card">...</nb-card>
+            <nb-card class="product-card">...</nb-card>
+
+        </div>
+    </div>
+</div>

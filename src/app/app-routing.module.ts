@@ -6,8 +6,8 @@ const routes: Routes = [
   { path: 'Auth', loadChildren: () => import('./client/auth/auth.module').then(m => m.AuthModule) },
   { path: 'profile', loadChildren: () => import('./client/userprofile/user-profile.module').then(m => m.UserProfileModule) },
   { path: 'add-product', loadChildren: () => import('./admin/products/product.module').then(m => m.AddProductModule) },
-
-  { path: '', redirectTo: 'Auth', pathMatch: 'full' }
+  { path: 'public', loadChildren: () => import('./client/public/public.module').then(m => m.PublicModule) },
+  { path: '', redirectTo: 'public', pathMatch: 'full' }
 ];
 
 @NgModule({
