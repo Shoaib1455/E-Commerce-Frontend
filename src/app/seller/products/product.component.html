@@ -13,7 +13,7 @@
                         <div class="col-md-6">
                             <label for="productName" class="form-label fw-medium">Product Name</label>
                             <input nbInput fullWidth type="text" id="productName" name="productName"
-                                class="form-control" placeholder="Enter product name" [(ngModel)]="product.productName"
+                                class="form-control" placeholder="Enter product name" [(ngModel)]="product.Name"
                                 required />
                         </div>
 
@@ -28,7 +28,7 @@
                         <div class="col-md-6">
                             <label for="category" class="form-label fw-medium">Category</label>
                             <select nbInput fullWidth id="category" name="category" class="form-select"
-                                [(ngModel)]="product.category" required>
+                                [(ngModel)]="product.categoryName" required>
                                 <option value="" disabled selected>Select category</option>
                                 <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
                             </select>

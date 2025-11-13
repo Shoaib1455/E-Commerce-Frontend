@@ -1,0 +1,84 @@
+.login-page-container {
+    // 🔑 Centers the content vertically and horizontally on the page
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    // Uses a slightly off-white background to separate the card from the rest of the app
+    //background-color: var(--background-basic-color-2);
+    padding: 1rem; // Ensures spacing on very small screens
+}
+
+.login-card {
+    // Fixed width for a clear, focused login experience on desktop
+    width: 100%;
+    max-width: 450px;
+
+    // Optional: Add a subtle shadow for depth
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius);
+}
+
+.login-header {
+    text-align: center;
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
+    // Removes the default border Nebular might add between header and body
+    border-bottom: none !important;
+}
+
+.seller-portal-title {
+    margin-bottom: 0.2rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+    // color: var(--color-primary-default);
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    color: var(--text-hint-color);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+
+    .label {
+        display: block;
+        margin-bottom: 0.4rem;
+        font-weight: 500;
+        color: var(--text-basic-color);
+    }
+}
+
+// Styling for the Forgot Password/Remember Me line
+.d-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.forgot-link,
+.register-link {
+    text-decoration: none;
+    font-weight: 500;
+    color: var(--color-primary-default);
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+// Ensure the Sign In button uses full width as specified in HTML
+button[nbButton][fullWidth] {
+    margin-top: 1rem;
+}
+
+// Media Query for Mobile Responsiveness
+@media (max-width: 576px) {
+    .login-card {
+        // Allows the card to take up more screen space on small devices
+        max-width: 90%;
+        margin: 1rem auto;
+    }
+}

@@ -4,21 +4,12 @@
 
         <nb-card class="categories-card">
             <nb-card-header>🛒 Product Categories</nb-card-header>
-            <nb-list class="category-list">
-
-                <nb-list-item>
-                    <div class="category-item-content" routerLink="/products/electronics">
-                        <nb-icon icon="tv-outline" class="category-icon"></nb-icon>
-                        <span class="category-name">Electronics</span>
-                    </div>
-                </nb-list-item>
-
-                <nb-list-item>
-                    <div class="category-item-content" routerLink="/products/fashion">
-                        <nb-icon icon="shopping-bag-outline" class="category-icon"></nb-icon>
-                        <span class="category-name">Fashion</span>
-                    </div>
-                </nb-list-item>
+            <nb-list>
+                <nb-list-item routerLink="/products/electronics">Electronics</nb-list-item>
+                <nb-list-item routerLink="/products/fashion">Fashion</nb-list-item>
+                <nb-list-item routerLink="/products/home">Home & Garden</nb-list-item>
+                <nb-list-item routerLink="/products/beauty">Health & Beauty</nb-list-item>
+                <nb-list-item routerLink="/products/sports">Sports & Outdoors</nb-list-item>
             </nb-list>
         </nb-card>
 
@@ -41,21 +32,21 @@
 
         <div class="product-grid">
 
-            <nb-card class="product-card">
+            <nb-card class="product-card" *ngFor="let product of products">
                 <div class="product-image-container">
-
+                    <img [src]="product.imageUrl" alt="Product Image" />
                 </div>
 
                 <nb-card-body>
                     <p class="product-name">
-                        Stylish Modern Running Shoes for Men
+                        {{product.name}}
                     </p>
 
                     <div class="pricing-details">
 
-                        <span class="current-price text-danger">$79.99</span>
+                        <span class="current-price text-danger">${{product.price}}</span>
 
-                        <span class="deleted-price text-hint">$109.99</span>
+                        <span class="deleted-price text-hint">${{product.price+(product.price*0.27)}}</span>
 
                         <span class="discount-badge text-success">-27%</span>
                     </div>
@@ -66,11 +57,11 @@
                 </nb-card-footer>
             </nb-card>
 
+            <!-- <nb-card class="product-card">...</nb-card>
             <nb-card class="product-card">...</nb-card>
             <nb-card class="product-card">...</nb-card>
             <nb-card class="product-card">...</nb-card>
-            <nb-card class="product-card">...</nb-card>
-            <nb-card class="product-card">...</nb-card>
+            <nb-card class="product-card">...</nb-card> -->
 
         </div>
     </div>

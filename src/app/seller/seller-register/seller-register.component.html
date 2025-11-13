@@ -1,0 +1,42 @@
+<div class="login-page-container bg-primary">
+    <nb-card class="login-card">
+
+        <nb-card-header class="login-header">
+            <h1 class="seller-portal-title bg-primary">Seller Registration Portal</h1>
+
+        </nb-card-header>
+
+        <nb-card-body>
+            <form (ngSubmit)="Register()">
+                <div class="form-group">
+                    <label for="email" class="label text-small mb-4">Name</label>
+                    <input fullWidth id="email" type="email" placeholder="Enter your registered email"
+                        [(ngModel)]="registrationDetails.Name" name="Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="label text-small mb-4">Email Address</label>
+                    <input fullWidth id="email" type="email" placeholder="Enter your registered email"
+                        [(ngModel)]="registrationDetails.email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="label text-small">Password</label>
+                    <input fullWidth id="password" type="password" placeholder="Enter your password"
+                        [(ngModel)]="registrationDetails.password" name="password" required>
+                </div>
+
+                <button nbButton fullWidth status="primary" class="bg-primary text-white" size="large" type="submit">
+                    Sign Up
+                </button>
+            </form>
+        </nb-card-body>
+
+        <!-- <nb-card-footer class="text-center flex">
+            <p class=" text-hint text-small">
+                Don't have an account?
+                <a routerLink="/seller/register" class="register-link">Register Now</a>
+            </p>
+        </nb-card-footer> -->
+
+    </nb-card>
+</div>

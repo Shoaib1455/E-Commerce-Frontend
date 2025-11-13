@@ -39,7 +39,7 @@
         </div>
     </nb-layout-header>
 
-    <div class="full-width-search-bar-wrapper" *ngIf="isSearchBarVisible" [@slideDown]>
+    <div class="full-width-search-bar-wrapper" *ngIf="isSearchBarVisible">
         <div class="full-width-search-bar">
             <input type="text" class="search-bar" nbInput placeholder="What are you looking for?"
                 [(ngModel)]="searchQuery" name="search" autofocus>
@@ -55,7 +55,7 @@
     </div>
 
     <nb-layout-column>
-        <div class="full-width-search-bar-wrapper" *ngIf="isSearchBarVisible" [@slideDown]>
+        <div class="full-width-search-bar-wrapper" *ngIf="isSearchBarVisible">
             <div class="full-width-search-bar">
                 <input type="text" nbInput placeholder="What are you looking for?" [(ngModel)]="searchQuery"
                     name="search" autofocus>

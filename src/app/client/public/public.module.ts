@@ -1,7 +1,8 @@
 import { NgModule } from "@angular/core";
 import { MainLayoutComponent } from "./layout/main-layout.component";
 import { SharedModule } from "src/app/shared/shared.module";
-import { AppRoutingModule } from "src/app/app-routing.module";
+//import { AppRoutingModule } from "src/app/app-routing.module";
+import { CommonModule } from '@angular/common'
 import { RouterModule, Routes } from "@angular/router";
 import { HomeComponent } from "./pages/home/home.component";
 
@@ -18,7 +19,7 @@ const routes: Routes = [
 ];
 @NgModule({
     declarations: [MainLayoutComponent, HomeComponent],
-    imports: [SharedModule, RouterModule.forChild(routes),]
+    imports: [CommonModule, SharedModule, RouterModule.forChild(routes),]
 
 })
 export class PublicModule { }
