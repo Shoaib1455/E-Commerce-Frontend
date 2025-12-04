@@ -1,0 +1,25 @@
+<div class="categories-page">
+    <div class="toolbar">
+        <button nbButton status="primary" (click)="openSidebar()">Add Category</button>
+    </div>
+
+    <nb-card>
+        <nb-card-body>
+            <nb-list>
+                <nb-list-item *ngFor="let c of categories">
+                    <div class="item-row">
+                        <div class="item-name">{{ c.name }}</div>
+                        <div class="actions">
+                            <button nbButton size="small" status="info" (click)="openSidebar(c)">Edit</button>
+                            <button nbButton size="small" status="danger" (click)="deleteCategory(c.id)">Delete</button>
+                        </div>
+                    </div>
+                </nb-list-item>
+            </nb-list>
+        </nb-card-body>
+    </nb-card>
+
+    <nb-sidebar tag="category-sidebar" right>
+        <app-category-sidebar [category]="selected" (saved)="onSaved($event)"></app-category-sidebar>
+    </nb-sidebar>
+</div>

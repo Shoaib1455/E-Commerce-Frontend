@@ -1,0 +1,27 @@
+.categories-page {
+    padding: 16px;
+}
+
+.toolbar {
+    margin-bottom: 12px;
+}
+
+.item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.item-name {
+    font-weight: 500;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+.category-sidebar {
+    width: 380px;
+}

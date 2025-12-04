@@ -1,0 +1,17 @@
+<div class="sidebar-body">
+    <h4>{{ model.id ? 'Edit Category' : 'Add Category' }}</h4>
+
+    <form (ngSubmit)="save()">
+        <label>Name</label>
+        <input nbInput name="name" required [(ngModel)]="model.name" />
+
+        <label>Description</label>
+        <textarea nbInput name="description" [(ngModel)]="model.description"></textarea>
+
+        <div class="actions">
+            <button nbButton status="primary" type="button" (click)="save()"
+                [disabled]="!model.name || saving">Save</button>
+            <button nbButton status="basic" type="button" (click)="cancel()">Cancel</button>
+        </div>
+    </form>
+</div>

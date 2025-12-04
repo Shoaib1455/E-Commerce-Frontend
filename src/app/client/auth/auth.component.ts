@@ -13,8 +13,8 @@ import { Router } from '@angular/router';
 export class AuthComponent implements OnInit {
     userdata = {} as {
         email: string;
-        PasswordN: string;
-        role: string;
+        Password: string;
+
     };
     constructor(private userdataservice: AuthService, private router: Router) {
 

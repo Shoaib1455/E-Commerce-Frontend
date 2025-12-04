@@ -1,0 +1,22 @@
+.sidebar-body {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sidebar-body label {
+    font-size: 0.85rem;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.sidebar-body input,
+.sidebar-body textarea {
+    width: 100%;
+}
+
+.sidebar-body .actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}

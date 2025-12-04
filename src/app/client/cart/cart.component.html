@@ -1,0 +1,177 @@
+<div class="cart-page-wrapper">
+
+    <div class="cart-container">
+        <div class="cart-items-list">
+            <nb-card>
+                <nb-card-header>
+                    <h2>Shopping Cart ({{ cartItems.length }} Items)</h2>
+                </nb-card-header>
+
+                <nb-card-body *ngFor="let item of cartItems" class="cart-item">
+                    <div class="item-left">
+                        <div class="product-image">
+
+                        </div>
+                    </div>
+
+                    <div class="item-right">
+                        <div class="product-details">
+                            <h3 class="product-name">{{ item.name }}</h3>
+                            <p class="product-sku">SKU: {{ item.sku }}</p>
+                            <p class="product-seller">Sold by: {{ item.seller }}</p>
+                            <button nbButton ghost status="danger" (click)="removeItem(item.id)">
+                                <nb-icon icon="trash-2-outline"></nb-icon> Remove
+                            </button>
+                        </div>
+
+                        <div class="item-actions">
+                            <div class="quantity-control">
+                                <nb-button-group size="small">
+                                    <button nbButton (click)="updateQuantity(item.id, -1)">-</button>
+                                    <input nbInput [value]="item.quantity" readonly class="qty-display" />
+                                    <button nbButton (click)="updateQuantity(item.id, 1)">+</button>
+                                </nb-button-group>
+                            </div>
+
+                            <div class="item-price">
+                                <span class="current-price">PKR {{ item.totalPrice | number }}</span>
+                                <span *ngIf="item.originalPrice" class="original-price">PKR {{ item.originalPrice |
+                                    number }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+
+            <nb-card class="shipping-billing-card">
+                <nb-card-header>
+                    <h2>Shipping & Billing Address</h2>
+                </nb-card-header>
+                <nb-card-body>
+                    <div class="address-section">
+                        <div class="address-toggle">
+                            <nb-checkbox [(ngModel)]="sameAsShipping" (ngModelChange)="onSameAsShippingChange()">
+                                Same as shipping address
+                            </nb-checkbox>
+                        </div>
+
+                        <div class="address-form">
+                            <h4>Shipping Address</h4>
+                            <div class="form-row">
+                                <input nbInput placeholder="Full Name" [(ngModel)]="shippingAddress.fullName" />
+                                <input nbInput type="number" placeholder="Phone Number"
+                                    [(ngModel)]="shippingAddress.phone" />
+                            </div>
+                            <div class="form-row">
+                                <input nbInput placeholder="Street Address" [(ngModel)]="shippingAddress.street" />
+                            </div>
+                            <div class="form-row">
+                                <input nbInput placeholder="City" [(ngModel)]="shippingAddress.city" />
+                                <input nbInput type="number" placeholder="Postal Code"
+                                    [(ngModel)]="shippingAddress.postalCode" />
+                            </div>
+                            <div class="form-row">
+                                <input nbInput placeholder="Country" [(ngModel)]="shippingAddress.country" />
+                                <input nbInput placeholder="State/Province" [(ngModel)]="shippingAddress.state" />
+                            </div>
+                        </div>
+
+                        <div *ngIf="!sameAsShipping" class="address-form">
+                            <h4>Billing Address</h4>
+                            <div class="form-row">
+                                <input nbInput placeholder="Full Name" [(ngModel)]="billingAddress.fullName" />
+                                <input nbInput type="number" placeholder="Phone Number"
+                                    [(ngModel)]="billingAddress.phone" />
+                            </div>
+                            <div class="form-row">
+                                <input nbInput placeholder="Street Address" [(ngModel)]="billingAddress.street" />
+                            </div>
+                            <div class="form-row">
+                                <input nbInput placeholder="City" [(ngModel)]="billingAddress.city" />
+                                <input nbInput type="number" placeholder="Postal Code"
+                                    [(ngModel)]="billingAddress.postalCode" />
+                            </div>
+                            <div class="form-row">
+                                <input nbInput placeholder="Country" [(ngModel)]="billingAddress.country" />
+                                <input nbInput placeholder="State/Province" [(ngModel)]="billingAddress.state" />
+                            </div>
+                        </div>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+
+            <nb-card class="payment-methods-card">
+                <nb-card-header>
+                    <h2>Payment Method</h2>
+                </nb-card-header>
+                <nb-card-body>
+                    <div class="payment-options">
+                        <nb-radio-group [(ngModel)]="selectedPaymentMethod">
+                            <div class="payment-option">
+
+                                <nb-radio [(ngModel)]="selectedPaymentMethod" value="cod" name="payment">
+                                    <nb-icon icon="home-outline" pack="eva"></nb-icon>
+                                    Cash on Delivery
+                                </nb-radio>
+                                <p class="payment-description">Pay when your order arrives at your doorstep</p>
+                            </div>
+
+                            <div class="payment-option">
+                                <nb-radio [(ngModel)]="selectedPaymentMethod" value="card" name="payment">
+                                    <nb-icon icon="credit-card-outline" pack="eva"></nb-icon>
+                                    Credit Card
+                                </nb-radio>
+                                <p class="payment-description">Secure payment via Visa, Mastercard, or other cards</p>
+                            </div>
+                        </nb-radio-group>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+        </div>
+
+        <div class="cart-summary-wrapper">
+            <nb-card class="cart-summary">
+                <nb-card-header>
+                    <h2>Order Summary</h2>
+                </nb-card-header>
+                <nb-card-body>
+                    <div class="summary-line">
+                        <span>Subtotal ({{ cartItems.length }} items)</span>
+                        <span class="summary-value">PKR {{ subtotal | number }}</span>
+                    </div>
+
+                    <div class="summary-line">
+                        <span>Shipping Fee</span>
+                        <span class="summary-value">PKR {{ shippingFee | number }}</span>
+                    </div>
+
+                    <div class="summary-line discount">
+                        <span>Voucher Applied</span>
+                        <span class="summary-value">-PKR {{ discount | number }}</span>
+                    </div>
+
+                    <div class="total-line">
+                        <h3>Total</h3>
+                        <span class="total-value">PKR {{ grantTotal | number }}</span>
+                    </div>
+
+                    <div *ngIf="error" class="error-message">{{ error }}</div>
+
+                    <button nbButton fullWidth status="warning" size="large" class="checkout-btn"
+                        (click)="proceedToCheckout()" [disabled]="loading">
+                        {{ loading ? 'Processing...' : 'PROCEED TO CHECKOUT' }}
+                    </button>
+
+                    <div class="accepted-payment">
+                        <p>We accept:</p>
+                        <div class="payment-icons">
+                            <nb-icon icon="credit-card-outline" pack="eva"></nb-icon>
+                            <nb-icon icon="browser-outline" pack="eva"></nb-icon>
+                        </div>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+        </div>
+    </div>
+
+</div>

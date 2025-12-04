@@ -1,5 +1,126 @@
-.header-row {
+.product-page {
+    padding: 2rem 5rem 2rem 5rem;
+}
+
+.product-top {
     display: flex;
-    justify-content: space-between;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.left-col {
+    flex: 1 1 55%;
+    // max-width: 600px;
+    justify-content: center;
+
+}
+
+.right-col {
+    flex: 0 0 320px;
+}
+
+.image-wrap {
+    background: #fff;
+    border: 1px solid #ececec;
+    display: flex;
     align-items: center;
+    justify-content: center;
+    min-height: 360px;
+    max-width: 600px;
+}
+
+.main-image {
+    max-width: 100%;
+    max-height: 520px;
+    object-fit: contain;
+}
+
+.thumbs {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.thumbs button img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+}
+
+.thumbs button.active {
+    outline: 2px solid var(--nb-theme-primary, #3366ff);
+}
+
+.product-title {
+    margin: 0 0 0.25rem 0;
+}
+
+.price {
+    font-size: 1.25rem;
+    color: #222;
+    margin-bottom: 0.75rem;
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.delivery ul {
+    padding-left: 1.2rem;
+    margin: 0;
+}
+
+.product-body {
+    margin-top: 1.25rem;
+    display: grid;
+    gap: 1rem;
+}
+
+.reviews .review {
+    border-bottom: 1px solid #eee;
+    padding: 0.5rem 0;
+}
+
+.related-carousel {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+}
+
+.related-item {
+    min-width: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.related-item img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+}
+
+@media (max-width: 900px) {
+    .product-top {
+        flex-direction: column;
+
+    }
+
+    .product-page {
+        padding: 2rem;
+    }
+
+    .actions {
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .right-col {
+        width: 100%;
+    }
 }

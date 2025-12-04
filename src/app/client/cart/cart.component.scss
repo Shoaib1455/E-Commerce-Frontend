@@ -1,0 +1,229 @@
+.cart-page-wrapper {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.cart-container {
+    display: flex;
+    gap: 20px;
+}
+
+// 1. Left Section
+.cart-items-list {
+    flex: 3; // Takes up 60-70%
+
+    // Remove default padding/border if Nebular card is already used
+    nb-card {
+        margin-bottom: 20px;
+    }
+}
+
+// 2. Right Section
+.cart-summary-wrapper {
+    flex: 1.5; // Takes up 30-40%
+}
+
+.cart-summary {
+    position: sticky; // Keep summary visible
+    top: 20px;
+}
+
+/* --- Individual Cart Item Styling --- */
+.cart-item {
+    display: flex;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee; // Subtle divider between items
+}
+
+.item-left {
+    flex-shrink: 0;
+    margin-right: 20px;
+}
+
+.product-image {
+    width: 100px;
+    height: 100px;
+    border: 1px solid nb-theme(border-basic-color-3); // Use Nebular variables
+}
+
+.item-right {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+.product-details {
+    flex-basis: 50%;
+}
+
+/* --- Quantity and Price --- */
+.item-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-basis: 40%;
+}
+
+.qty-display {
+    width: 50px; // Ensure input is small
+    text-align: center;
+}
+
+.current-price {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: nb-theme(color-warning-500); // Use Nebular warning color (often orange)
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: nb-theme(text-hint-color);
+    font-size: 0.9em;
+    margin-left: 10px;
+}
+
+/* --- Summary Section Styling --- */
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+}
+
+.total-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    margin-top: 10px;
+    border-top: 2px solid nb-theme(border-basic-color-4);
+}
+
+.total-value {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: nb-theme(color-warning-500);
+}
+
+.accepted-payment {
+    text-align: center;
+    margin-top: 20px;
+
+    p {
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+}
+
+.payment-icons nb-icon {
+    font-size: 2em;
+    color: nb-theme(text-hint-color);
+    margin: 0 5px;
+}
+
+/* --- Shipping & Billing Address Card --- */
+.shipping-billing-card {
+    margin-bottom: 20px;
+}
+
+.address-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.address-toggle {
+    display: flex;
+    align-items: center;
+}
+
+.address-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    h4 {
+        margin: 0;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+    }
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+
+    input[nbInput] {
+        width: 100%;
+    }
+
+    &:has(input:only-child) {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- Payment Methods Card --- */
+.payment-methods-card {
+    margin-bottom: 20px;
+}
+
+.payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.payment-option {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    border: 2px solid #eee;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+        border-color: var(--nb-theme-primary, #3366ff);
+        background-color: rgba(51, 102, 255, 0.05);
+    }
+
+    nb-radio {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        nb-icon {
+            font-size: 1.2rem;
+        }
+    }
+}
+
+.payment-description {
+    margin: 0;
+    margin-left: 1.8rem;
+    font-size: 0.85rem;
+    color: var(--nb-text-hint-color, #a4afb7);
+}
+
+.error-message {
+    background-color: rgba(255, 82, 82, 0.1);
+    border-left: 4px solid var(--nb-theme-danger, #ff5252);
+    color: var(--nb-theme-danger, #ff5252);
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+/* --- Media Queries for Responsiveness --- */
+@media (max-width: 992px) {
+    .cart-container {
+        flex-direction: column;
+    }
+
+    .cart-summary {
+        position: static;
+    }
+}

@@ -1,25 +1,94 @@
-<div>
-    <nb-card>
-        <nb-card-header class="header-row">
-            <div>Products</div>
-            <div>
-                <button nbButton status="primary" size="small" (click)="loadproducts()" class="get-report-btn">
-                    Get Products
+<div class="product-page" *ngIf="product; else empty">
+    <div class="product-top">
+        <div class="left-col">
+            <div class="image-wrap">
+                <img [src]="product.imageUrl" alt="{{product?.name}}" class="main-image" />
+            </div>
+            <div class="thumbs">
+                <button nbButton ghost *ngFor="let img of images; let i = index" (click)="selectImage(i)"
+                    [class.active]="i === selectedImageIndex">
+                    <img [src]="img" alt="thumb-{{i}}" />
                 </button>
             </div>
+        </div>
 
-        </nb-card-header>
-        <nb-card-body>
-            <nb-list *ngFor="let product of products">
-                <nb-list-item>
-                    <div class="item-container">
-                        <div class="item-content">{{product}}</div>
+        <div class="right-col">
+            <h2 class="product-title">{{ product?.name || 'Product Name' }}</h2>
+            <div class="price">{{ product?.price ? ('$' + (product.price | number:'1.2-2')) : 'Price unavailable' }}
+            </div>
 
+            <div class="actions">
+                <div class="input-fullWidth">
+                    <input nbInput type="number" min="1" [(ngModel)]="quantity" />
+                </div>
+                <button nbButton status="primary" (click)="addToCart()">Add to cart</button>
+            </div>
+
+            <div class="delivery">
+                <h4>Delivery options</h4>
+                <ul>
+                    <li *ngFor="let d of deliveryOptions">{{ d }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="product-body">
+        <section class="description nb-card">
+            <nb-card>
+                <nb-card-header>Product Description</nb-card-header>
+                <nb-card-body>
+                    <div [innerHTML]="product?.description || 'No description available.'"></div>
+                </nb-card-body>
+            </nb-card>
+        </section>
+
+        <section class="reviews nb-card">
+            <nb-card>
+                <nb-card-header>Customer Reviews ({{reviews.length}})</nb-card-header>
+                <nb-card-body>
+                    <div *ngIf="reviews.length === 0">No reviews yet — be the first to review this product.</div>
+                    <div class="review" *ngFor="let r of reviews">
+                        <div class="review-head">
+                            <strong>{{ r.author || 'Anonymous' }}</strong>
+                            <span class="rating">{{ r.rating || 0 }} / 5</span>
+                        </div>
+                        <div class="review-body">{{ r.comment }}</div>
                     </div>
-                </nb-list-item>
-            </nb-list>
+                    <div class="add-review">
+                        <textarea nbInput placeholder="Write a short review" [(ngModel)]="newReviewText"></textarea>
+                        <div class="review-actions">
+                            <button nbButton status="primary" (click)="submitReview()">Submit Review</button>
+                        </div>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+        </section>
+
+        <section class="related nb-card">
+            <nb-card>
+                <nb-card-header>Related Products</nb-card-header>
+                <nb-card-body>
+                    <div class="related-carousel">
+                        <nb-card class="related-item" *ngFor="let rp of relatedProducts">
+                            <img [src]="rpImage(rp)" alt="{{rp?.name}}" />
+                            <div class="rp-info">
+                                <div class="rp-name">{{ rp?.name }}</div>
+                                <div class="rp-price">{{ rp?.price ? ('$' + rp.price) : '' }}</div>
+                            </div>
+                            <button nbButton ghost size="small" (click)="openRelated(rp)">View</button>
+                        </nb-card>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+        </section>
+    </div>
+</div>
+
+<ng-template #empty>
+    <nb-card>
+        <nb-card-body>
+            <div class="empty">No product selected. Click a product to view details.</div>
         </nb-card-body>
     </nb-card>
-
-</div>
-<router-outlet></router-outlet>
+</ng-template>

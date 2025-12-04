@@ -15,4 +15,10 @@ export class AuthService {
         return this.http.post<any>(environment.backendUrl + this.apivUrl, userdata, { observe: 'response' });
     }
 
+    // optional register method; backend endpoint name may vary
+    postRegister(userdata: any): Observable<HttpResponse<any>> {
+        const url = environment.backendUrl + 'usermanagement/Register';
+        return this.http.post<any>(url, userdata, { observe: 'response' });
+    }
+
 }

@@ -1,8 +1,7 @@
-
-
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { SellerAuthService } from './seller-auth.service'
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,9 +17,7 @@ export class SellerAuthComponent {
         rememberMe: false
     };
 
-    constructor(private sellerauthservice: SellerAuthService) { }
-
-
+    constructor(private sellerauthservice: SellerAuthService, private router: Router) { }
     login() {
 
         this.sellerauthservice.login(this.loginData).subscribe({
@@ -28,6 +25,7 @@ export class SellerAuthComponent {
                 console.log("information send successfully");
                 var token = res.body.token
                 localStorage.setItem('authToken', token);
+                this.router.navigate(['/add-product']);
 
 
             },

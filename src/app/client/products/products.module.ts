@@ -4,7 +4,8 @@ import { ProductsComponent } from './products.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 const routes: Routes = [
-    { path: '', component: ProductsComponent }
+    { path: ':id', component: ProductsComponent }
+
 ];
 
 @NgModule(
@@ -16,4 +17,4 @@ const routes: Routes = [
             SharedModule,
             RouterModule.forChild(routes)]
     })
-export class ProductsModule { }
+export class ProductModule { }

@@ -1,7 +1,7 @@
 export const environment = {
     production: false,
     //redirectURL: 'http://localhost:4200/main/chat',
-    backendUrl: 'https://localhost:7039/api/', // 'http://175.107.196.226:5003/api/', //'http://52.77.169.21/api/', // https://c5e9-202-47-59-83.ngrok-free.app/
+    backendUrl: 'https://localhost:44341/api/', // 'http://175.107.196.226:5003/api/', //'http://52.77.169.21/api/', // https://c5e9-202-47-59-83.ngrok-free.app/
 
     //   firebase: {
     //     apiKey: "AIzaSyBeWs442W_nu4xZoStfZRNzVOKEWPXj2MU",

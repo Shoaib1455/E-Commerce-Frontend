@@ -53,15 +53,10 @@
                 </nb-card-body>
 
                 <nb-card-footer>
-                    <button nbButton status="primary" size="small">Add to Cart</button>
+                    <button nbButton status="primary" (click)="onAddToCart(product.id)" size="small">Add to
+                        Cart</button>
                 </nb-card-footer>
             </nb-card>
-
-            <!-- <nb-card class="product-card">...</nb-card>
-            <nb-card class="product-card">...</nb-card>
-            <nb-card class="product-card">...</nb-card>
-            <nb-card class="product-card">...</nb-card>
-            <nb-card class="product-card">...</nb-card> -->
 
         </div>
     </div>

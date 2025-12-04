@@ -1,0 +1,29 @@
+<nb-card>
+    <nb-card-header>
+        <nb-select [(selected)]="mode" (selectedChange)="switchMode($event)">
+            <nb-option value="login">Login</nb-option>
+            <nb-option value="register">Register</nb-option>
+        </nb-select>
+    </nb-card-header>
+
+    <nb-card-body>
+        <div *ngIf="mode === 'login'">
+            <input nbInput fullWidth type="email" placeholder="Email" [(ngModel)]="loginModel.email" />
+            <input nbInput fullWidth type="password" placeholder="Password" [(ngModel)]="loginModel.Password" />
+        </div>
+
+        <div *ngIf="mode === 'register'">
+            <input nbInput fullWidth type="text" placeholder="Full name" [(ngModel)]="registerModel.name" />
+            <input nbInput fullWidth type="email" placeholder="Email" [(ngModel)]="registerModel.email" />
+            <input nbInput fullWidth type="password" placeholder="Password" [(ngModel)]="registerModel.password" />
+        </div>
+
+        <div *ngIf="error" class="error">{{ error }}</div>
+    </nb-card-body>
+
+    <nb-card-footer class="dialog-actions">
+        <button nbButton status="basic" (click)="cancel()">Cancel</button>
+        <button nbButton status="primary" (click)="submit()" [disabled]="loading">{{ mode === 'login' ? 'Sign in' :
+            'Register' }}</button>
+    </nb-card-footer>
+</nb-card>

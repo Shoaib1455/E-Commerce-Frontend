@@ -1,0 +1,14 @@
+.dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.error {
+    color: var(--nb-theme-danger, #d9534f);
+    margin-top: 0.5rem;
+}
+
+input[nbInput] {
+    margin-bottom: 0.5rem;
+}
