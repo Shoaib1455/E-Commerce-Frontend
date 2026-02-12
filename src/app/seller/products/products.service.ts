@@ -12,12 +12,14 @@ export class ProductsService {
 
     constructor(private http: HttpClient) { }
 
-    addProduct(userdetails: any): Observable<any> {
+    addProduct(formData: FormData): Observable<any> {
         const token = localStorage.getItem('authToken');
 
         const headers = new HttpHeaders({
             'Authorization': `Bearer ${token}`
         });
-        return this.http.post<any>(environment.backendUrl + this.apiUrl, userdetails, { headers })
+        
+        // Don't set Content-Type header for FormData - browser will set it automatically with boundary
+        return this.http.post<any>(environment.backendUrl + this.apiUrl, formData, { headers })
     }
 }

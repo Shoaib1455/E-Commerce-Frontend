@@ -42,8 +42,12 @@ export class ProductsComponent implements OnInit {
         this.productservice.getproductbyid(this.productId).subscribe({
             next: (data) => {
                 this.product = data.body || [];
+                this.images=data.body.multipleImagesUrl.$values || [];
+
 
                 console.log(this.product);
+                console.log(this.images);
+                console.log(this.images[0]);
                 this.setupProductState();
             },
             error: (error) => {
@@ -63,15 +67,15 @@ export class ProductsComponent implements OnInit {
         }
 
         // fill images from various possible fields
-        if (Array.isArray(this.product.images) && this.product.images.length) {
-            this.images = this.product.images;
-        } else if (this.product.imageUrl) {
-            this.images = [this.product.imageUrl];
-        } else if (this.product.imagesUrls) {
-            this.images = this.product.imagesUrls;
-        } else {
-            this.images = [];
-        }
+        // if (Array.isArray(this.product.multipleImagesUrl) && this.product.multipleImagesUrl.length) {
+        //     this.images = this.product.multipleImagesUrl;
+        // } else if (this.product.imageUrl) {
+        //     this.images = [this.product.imageUrl];
+        // } else if (this.product.imagesUrls) {
+        //     this.images = this.product.imagesUrls;
+        // } else {
+        //     this.images = [];
+        // }
 
         this.selectedImageIndex = 0;
         this.reviews = this.product.reviews || [];

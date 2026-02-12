@@ -5,6 +5,7 @@
                 <img [src]="product.imageUrl" alt="{{product?.name}}" class="main-image" />
             </div>
             <div class="thumbs">
+                
                 <button nbButton ghost *ngFor="let img of images; let i = index" (click)="selectImage(i)"
                     [class.active]="i === selectedImageIndex">
                     <img [src]="img" alt="thumb-{{i}}" />

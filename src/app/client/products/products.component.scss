@@ -1,11 +1,11 @@
 .product-page {
-    padding: 2rem 5rem 2rem 5rem;
+    padding: 2rem 7rem 2rem 7rem;
 }
 
 .product-top {
     display: flex;
-    gap: 1.5rem;
-    align-items: flex-start;
+    gap: 1rem;
+   
 }
 
 .left-col {
@@ -16,7 +16,7 @@
 }
 
 .right-col {
-    flex: 0 0 320px;
+    
 }
 
 .image-wrap {
@@ -32,7 +32,7 @@
 .main-image {
     max-width: 100%;
     max-height: 520px;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .thumbs {
@@ -122,5 +122,12 @@
 
     .right-col {
         width: 100%;
+    }
+    
+}
+@media (max-width: 1250px) {
+    .product-top {
+        flex-direction: column;
+
     }
 }
