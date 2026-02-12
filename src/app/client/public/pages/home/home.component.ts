@@ -20,10 +20,7 @@ export class HomeComponent implements OnInit {
     loadproducts(): void {
         this.homeservice.getproducts().subscribe({
             next: (res) => {
-                this.products = res.body.$values;
-
-                // log to check
-                console.log(this.products);
+                this.products = res.body.result.$values;
             },
             error: (error) => console.error('Error fetching products:', error)
 
