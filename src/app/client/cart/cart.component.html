@@ -7,18 +7,18 @@
                     <h2>Shopping Cart ({{ cartItems.length }} Items)</h2>
                 </nb-card-header>
 
-                <nb-card-body *ngFor="let item of cartItems" class="cart-item">
-                    <div class="item-left">
+                <nb-card-body  class="cart-item" *ngFor="let item of cartItems">
+                    <div class="item-left" >
                         <div class="product-image">
-
+<img src="{{ item.product.imageUrl }}" height="100" width="100" alt="{{ item.product.name }}">
                         </div>
                     </div>
 
-                    <div class="item-right">
+                    <div class="item-right" >
                         <div class="product-details">
-                            <h3 class="product-name">{{ item.name }}</h3>
-                            <p class="product-sku">SKU: {{ item.sku }}</p>
-                            <p class="product-seller">Sold by: {{ item.seller }}</p>
+                            <h3 class="product-name">{{ item.product.name }}</h3>
+                            <p class="product-sku">SKU: {{ item.product.sku }}</p>
+                            <p class="product-seller">Sold by: {{ item.product.seller }}</p>
                             <button nbButton ghost status="danger" (click)="removeItem(item.id)">
                                 <nb-icon icon="trash-2-outline"></nb-icon> Remove
                             </button>

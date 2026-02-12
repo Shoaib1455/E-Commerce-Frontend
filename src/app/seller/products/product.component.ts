@@ -8,7 +8,14 @@ import { HttpHeaders } from "@angular/common/http";
 })
 export class AddProductComponent {
     constructor(private productservice: ProductsService) { }
+    
+    // Thumbnail image
     imagePreview: string | ArrayBuffer | null = null;
+    ThumbnailImage: File | null = null;
+    
+    // Multiple images
+    imagePreviews: (string | ArrayBuffer)[] = [];
+    ProductImages: File[] = [];
 
     product = {
         Name: '',
@@ -16,40 +23,89 @@ export class AddProductComponent {
         categoryName: '',
         sku: null,
         description: '',
-        imageUrl: ''
+        ImageUrl: ''
     };
 
     categories = ['Electronics', 'Clothing', 'Shoes', 'Accessories', 'Home Appliances'];
 
     token = localStorage.getItem('authToken');
+    
+    // Handle thumbnail image
     onFileSelected(event: any) {
         const file = event.target.files[0];
         if (file) {
+            this.ThumbnailImage = file;
             const reader = new FileReader();
             reader.onload = () => {
-                this.product.imageUrl = reader.result as string;
-
+                this.imagePreview = reader.result as string;
+                this.product.ImageUrl = reader.result as string;
             };
             reader.readAsDataURL(file);
         }
     }
 
+    // Handle multiple images
+    onMultipleFilesSelected(event: any) {
+        const files: FileList = event.target.files;
+        if (files && files.length > 0) {
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                this.ProductImages.push(file);
+                
+                const reader = new FileReader();
+                reader.onload = () => {
+                    this.imagePreviews.push(reader.result as string | ArrayBuffer);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    }
+
+    removeImage(index: number) {
+        this.ProductImages.splice(index, 1);
+        this.imagePreviews.splice(index, 1);
+    }
+
     onSubmit() {
         const token = localStorage.getItem('authToken');
 
+        // Create FormData for multipart request
+        const formData = new FormData();
+        formData.append('Name', this.product.Name);
+        formData.append('price', String(this.product.price || 0));
+        formData.append('categoryName', this.product.categoryName);
+        formData.append('sku', String(this.product.sku || 0));
+        formData.append('description', this.product.description);
+        formData.append('ImageUrl', this.product.ImageUrl);
 
-        this.productservice.addProduct(this.product).subscribe({
-            next: () => { console.log("data send successfully") },
+        // Append thumbnail image if exists
+        if (this.ThumbnailImage) {
+            console.log("Thumbnail image:", this.ThumbnailImage);
+            formData.append('ThumbnailImage', this.ThumbnailImage, this.ThumbnailImage.name);
+        }
+
+        // Append all selected images
+        for (let i = 0; i < this.ProductImages.length; i++) {
+            formData.append('ProductImages', this.ProductImages[i], this.ProductImages[i].name);
+        }
+
+        this.productservice.addProduct(formData).subscribe({
+            next: () => { 
+                console.log("data sent successfully");
+                this.onCancel();
+            },
             error: (err) => {
-                console.log("error occured", err)
+                console.log("error occurred", err)
             }
         })
-        // send this data to backend API (FormData)
     }
 
     onCancel() {
-        this.product = { Name: '', price: null, categoryName: '', sku: null, description: '', imageUrl: '' };
+        this.product = { Name: '', price: null, categoryName: '', sku: null, description: '', ImageUrl: '' };
         this.imagePreview = null;
+        this.ThumbnailImage = null;
+        this.imagePreviews = [];
+        this.ProductImages = [];
     }
 
 }

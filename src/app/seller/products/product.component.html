@@ -65,6 +65,33 @@
                             </div>
                         </div>
 
+                        <!-- Multiple Images Upload -->
+                        <div class="col-12">
+                            <label class="form-label fw-medium">Product Images (Multiple)</label>
+                            <input type="file" accept="image/*" multiple class="form-control"
+                                (change)="onMultipleFilesSelected($event)" />
+                            <small class="text-muted">You can select one or more images</small>
+                        </div>
+
+                        <!-- Multiple Image Previews -->
+                        <div class="col-12" *ngIf="imagePreviews.length > 0">
+                            <label class="form-label fw-medium">Previews</label>
+                            <div class="row g-3">
+                                <div class="col-md-3" *ngFor="let preview of imagePreviews; let i = index">
+                                    <div class="border rounded-3 p-2 position-relative">
+                                        <img [src]="preview" alt="Preview {{ i + 1 }}" class="img-fluid rounded-3"
+                                            style="max-height: 150px; width: 100%;" />
+                                        <button type="button" nbButton status="danger" size="small"
+                                            class="position-absolute top-0 end-0 m-2"
+                                            (click)="removeImage(i)"
+                                            style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
+                                            <nb-icon icon="trash-2-outline"></nb-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Buttons -->
                         <div class="col-12 text-end mt-3">
                             <button nbButton status="primary" type="submit" [disabled]="!productForm.valid">
