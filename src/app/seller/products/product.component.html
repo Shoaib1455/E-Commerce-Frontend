@@ -36,9 +36,14 @@
 
                         <!-- Stock Quantity -->
                         <div class="col-md-6">
-                            <label for="stock" class="form-label fw-medium">Product Sku</label>
-                            <input nbInput fullWidth type="text" id="stock" name="stock" class="form-control"
-                                placeholder="Enter available stock" [(ngModel)]="product.sku" required />
+                            <label for="sku" class="form-label fw-medium">Product Sku</label>
+                            <input nbInput fullWidth type="text" id="sku" name="sku" class="form-control"
+                                placeholder="Enter product SKU" [(ngModel)]="product.sku" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="stock" class="form-label fw-medium">Product Quantity</label>
+                            <input nbInput fullWidth type="number" id="stock" name="stock" class="form-control"
+                                placeholder="Product intial quantity" [(ngModel)]="product.Quantity" required />
                         </div>
 
                         <!-- Description -->
