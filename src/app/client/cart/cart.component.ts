@@ -80,7 +80,7 @@ export class CartComponent implements OnInit {
 
     removeItem(productId: number): void {
         // Remove item and sync to storage
-        this.cartItems = this.cartItems.filter(item => item.id != productId);
+        this.cartItems = this.cartItems.filter(item => item.productid !== productId);
         this.calculateSubtotal();
         this.saveCartToStorage();
         console.log(`Removed product: ${productId}`);
