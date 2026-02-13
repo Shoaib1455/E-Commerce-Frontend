@@ -16,6 +16,7 @@ export class CartComponent implements OnInit {
     subtotal = 0; // Will be calculated from cartItems
     grantTotal = 0;
     sameAsShipping = true;
+    totalAmount = 0;
 
     selectedPaymentMethod = 'card';
     loading = false;
@@ -87,12 +88,15 @@ export class CartComponent implements OnInit {
 
     updateQuantity(productId: number, change: number): void {
         // Update quantity and sync to storage
-        const item = this.cartItems.find(p => p.id === productId);
+        
+        const item = this.cartItems.find(p => p.productid == productId);
+        console.log(item);
         if (item) {
             item.quantity = Math.max(1, item.quantity + change);
+            console.log(`Updated quantity for product ${productId}: ${item.quantity}`);
             // Recalculate total price if unit price exists
-            if (item.unitPrice) {
-                item.totalPrice = item.quantity * item.unitPrice;
+            if (item.product.price) {
+                item.totalPrice = item.quantity * item.product.price;
             }
             this.calculateSubtotal();
             this.saveCartToStorage();
@@ -135,7 +139,7 @@ export class CartComponent implements OnInit {
             // Try multiple possible field names for productId (note: backend uses lowercase 'productid')
             const productId = item.productid || item.productId || item.id || (item.product && item.product.id) || null;
             const quantity = item.quantity || 1;
-            let unitPrice = item.unitPrice;
+            let unitPrice = item.product.price;
             if (unitPrice == null) {
                 if (item.totalPrice != null && quantity) {
                     unitPrice = +(item.totalPrice / quantity);

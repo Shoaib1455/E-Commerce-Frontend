@@ -17,6 +17,7 @@ export class ProductsComponent implements OnInit {
     productId: number = 0;
     selectedImageIndex = 0;
     quantity = 1;
+    totalPrice = 0;
     reviews: Array<{ author?: string; rating?: number; comment?: string }> = [];
     newReviewText = '';
     relatedProducts: any[] = [];
@@ -112,7 +113,8 @@ export class ProductsComponent implements OnInit {
     private addToCartInternal() {
         try {
             const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-            cart.push({ productid: this.productId, product: this.product, quantity: this.quantity });
+            this.totalPrice = this.product.price * this.quantity;
+            cart.push({ productid: this.productId, product: this.product, quantity: this.quantity, totalPrice: this.totalPrice });
             localStorage.setItem('cart', JSON.stringify(cart));
             console.log('Added to cart', this.product, 'qty', this.quantity);
         } catch (err) {
