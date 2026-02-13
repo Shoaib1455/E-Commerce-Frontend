@@ -22,6 +22,7 @@ export class AddProductComponent {
         price: null,
         categoryName: '',
         sku: null,
+        Quantity: 0,
         description: '',
         ImageUrl: ''
     };
@@ -77,6 +78,7 @@ export class AddProductComponent {
         formData.append('sku', String(this.product.sku || 0));
         formData.append('description', this.product.description);
         formData.append('ImageUrl', this.product.ImageUrl);
+        formData.append('Quantity', String(this.product.Quantity || 0));
 
         // Append thumbnail image if exists
         if (this.ThumbnailImage) {
@@ -101,7 +103,7 @@ export class AddProductComponent {
     }
 
     onCancel() {
-        this.product = { Name: '', price: null, categoryName: '', sku: null, description: '', ImageUrl: '' };
+        this.product = { Name: '', price: null, categoryName: '', sku: null, description: '', ImageUrl: '' ,Quantity: 0};
         this.imagePreview = null;
         this.ThumbnailImage = null;
         this.imagePreviews = [];
