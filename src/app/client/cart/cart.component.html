@@ -10,33 +10,44 @@
                 <nb-card-body  class="cart-item" *ngFor="let item of cartItems">
                     <div class="item-left" >
                         <div class="product-image">
-<img src="{{ item.product.imageUrl }}" height="100" width="100" alt="{{ item.product.name }}">
+                            <img src="{{ item.product.imageUrl }}" height="100" width="100" alt="{{ item.product.name }}">
                         </div>
                     </div>
 
                     <div class="item-right" >
                         <div class="product-details">
                             <h3 class="product-name">{{ item.product.name }}</h3>
-                            <p class="product-sku">SKU: {{ item.product.sku }}</p>
-                            <p class="product-seller">Sold by: {{ item.product.seller }}</p>
+                            <!-- <p class="product-sku">SKU: {{ item.product.sku }}</p>
+                            <p class="product-seller">Sold by: {{ item.product.seller }}</p> -->
                             <button nbButton ghost status="danger" (click)="removeItem(item.id)">
                                 <nb-icon icon="trash-2-outline"></nb-icon> Remove
                             </button>
                         </div>
 
+                        <div class="center-items">
+                            
+                                <div class="single-item-price">
+                                        <span class="current-price">Per Qty</span><br>
+                                        <span class="current-price"> {{ item.product.price | number }}</span>
+                                
+                                </div>
+                                
+                                
+                        </div>
+
                         <div class="item-actions">
                             <div class="quantity-control">
+                                
                                 <nb-button-group size="small">
-                                    <button nbButton (click)="updateQuantity(item.id, -1)">-</button>
+                                    <button nbButton (click)="updateQuantity(item.productid, -1)">-</button>
                                     <input nbInput [value]="item.quantity" readonly class="qty-display" />
-                                    <button nbButton (click)="updateQuantity(item.id, 1)">+</button>
+                                    <button nbButton (click)="updateQuantity(item.productid, 1)">+</button>
                                 </nb-button-group>
                             </div>
-
+                                    
                             <div class="item-price">
-                                <span class="current-price">PKR {{ item.totalPrice | number }}</span>
-                                <span *ngIf="item.originalPrice" class="original-price">PKR {{ item.originalPrice |
-                                    number }}</span>
+                                <span class="current-price">{{ item.totalPrice | number }}</span>
+                                
                             </div>
                         </div>
                     </div>
