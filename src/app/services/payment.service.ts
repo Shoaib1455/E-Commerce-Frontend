@@ -6,11 +6,11 @@ import { Injectable } from '@angular/core';
 })
 export class PaymentService {
 
-    private baseUrl = 'https://localhost:7039/api/webhooks/payment';
+    private baseUrl = 'https://localhost:7039/api/webhooks/createpaymentintent';
 
     constructor(private http: HttpClient) { }
 
-    createPaymentIntent(amount: number, orderId: number) {
+    createPaymentIntent(orderId: number) {
         const token = localStorage.getItem('token') || localStorage.getItem('auth_token') || localStorage.getItem('authToken');
         let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         if (token) {
@@ -19,7 +19,7 @@ export class PaymentService {
 
         return this.http.post<{ clientSecret: string }>(
             `${this.baseUrl}`,
-            { amount, orderId },
+            {  orderId },
             { headers }
         );
     }

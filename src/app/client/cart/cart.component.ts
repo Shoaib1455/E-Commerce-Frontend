@@ -212,9 +212,11 @@ export class CartComponent implements OnInit {
         console.log('Checkout payload:', checkoutPayload);
 
         this.orderService.checkoutUser(checkoutPayload).subscribe({
+            
             next: (response) => {
                 this.loading = false;
                 console.log('Order created successfully:', response);
+                console.log('Order created successfully:', response.id);
                 // Clear cart after successful order
                 localStorage.removeItem('cart');
                 this.cartItems = [];
