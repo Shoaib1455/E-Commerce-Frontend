@@ -10,11 +10,14 @@ export class PaymentService {
 
     constructor(private http: HttpClient) { }
 
-    createPaymentIntent(orderId: number) {
+    createPaymentIntent(orderId: number, idempotencyKey?: string) {
         const token = localStorage.getItem('token') || localStorage.getItem('auth_token') || localStorage.getItem('authToken');
         let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         if (token) {
             headers = headers.set('Authorization', `Bearer ${token}`);
+        }
+        if (idempotencyKey) {
+            headers = headers.set('Idempotency-Key', idempotencyKey);
         }
 
         return this.http.post<{ clientSecret: string }>(
