@@ -29,15 +29,15 @@ export class CheckoutComponent implements OnInit {
         this.card = elements.create('card');
         this.card.mount('#card-element');
         this.orderId = state.orderId;
-       
         this.amount = state.orderData.totalAmount;
     }
 
     async pay() {
+        const idempotencyKey = await this.generateIdempotencyKey(this.orderId);
         // 3️⃣ Call backend to create PaymentIntent & get clientSecret
       
         const res = await this.paymentService
-            .createPaymentIntent( this.orderId)
+            .createPaymentIntent( this.orderId,idempotencyKey)
             .toPromise();
 
         const clientSecret = res!.clientSecret;
@@ -57,6 +57,22 @@ export class CheckoutComponent implements OnInit {
                 // Optionally call backend to update order status
             }
         }
+    }
+   // fallback UUID v4 generator
+    // private uuidv4(): string {
+    //     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    //         const r = Math.random() * 16 | 0;
+    //         const v = c === 'x' ? r : (r & 0x3 | 0x8);
+    //         return v.toString(16);
+    //     });
+    // }
+    private async generateIdempotencyKey(orderId: number): Promise<string> {
+        const data = new TextEncoder().encode(`order-${orderId}`);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        // return as UUID-like format: 8-4-4-4-12
+        return `${hashHex.substring(0, 8)}-${hashHex.substring(8, 12)}-${hashHex.substring(12, 16)}-${hashHex.substring(16, 20)}-${hashHex.substring(20, 32)}`;
     }
     getorderId(event: any) {
         this.orderId = event;
