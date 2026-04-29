@@ -3,20 +3,56 @@
     z-index: 1020;
 }
 
+.navbar {
+    padding: 0.85rem 0;
+}
+
 .navbar-brand {
-    color: #dc3545;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.55rem 1.1rem;
+    color: #ffffff;
+    background: linear-gradient(135deg, #dc3545, #b02a37);
+    border-radius: 8px;
     font-size: 1.45rem;
     letter-spacing: 0;
+    text-decoration: none;
+    box-shadow: 0 10px 22px rgba(220, 53, 69, 0.24);
+}
+
+.navbar-brand:hover,
+.navbar-brand:focus {
+    color: #ffffff;
+    background: linear-gradient(135deg, #c92f40, #9f2430);
 }
 
 .nav-link {
-    color: #445066;
+    min-height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.55rem 1rem !important;
+    color: #ffffff;
+    background: #dc3545;
+    border: 1px solid #dc3545;
+    border-radius: 8px;
     font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    box-shadow: 0 8px 18px rgba(220, 53, 69, 0.16);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
 }
 
 .nav-link:hover,
-.nav-link.active {
-    color: #dc3545;
+.nav-link:focus,
+.nav-link.active,
+.navbar-nav .nav-link.active {
+    color: #ffffff;
+    background: #b02a37;
+    border-color: #b02a37;
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px rgba(176, 42, 55, 0.24);
 }
 
 .icon-btn {
@@ -26,6 +62,26 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
+}
+
+.signin-btn {
+    min-height: 42px;
+    display: inline-flex;
+    align-items: center;
+    color: #ffffff;
+    background: #101828;
+    border: 1px solid #101828;
+    border-radius: 8px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 10px 22px rgba(16, 24, 40, 0.18);
+}
+
+.signin-btn:hover,
+.signin-btn:focus {
+    color: #ffffff;
+    background: #dc3545;
+    border-color: #dc3545;
 }
 
 .search-strip {
@@ -52,6 +108,15 @@ main {
 }
 
 @media (max-width: 575.98px) {
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    .nav-link,
+    .signin-btn {
+        width: 100%;
+    }
+
     .search-strip .container-xl {
         flex-direction: column;
     }

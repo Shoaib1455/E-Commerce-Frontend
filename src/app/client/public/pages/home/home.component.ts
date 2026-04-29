@@ -13,6 +13,7 @@ import { LoginRegisterDialogComponent } from 'src/app/shared/login-register-dial
 })
 export class HomeComponent implements OnInit {
     products: any[] = [];
+    categoryRows: { name: string; products: any[] }[] = [];
     constructor(private homeservice: HomeService, private router: Router, private dialogService: NbDialogService) { }
     ngOnInit(): void {
         this.loadproducts();
@@ -21,12 +22,37 @@ export class HomeComponent implements OnInit {
         this.homeservice.getproducts().subscribe({
             next: (res) => {
                 this.products = res.body.result.$values;
+                this.categoryRows = this.buildCategoryRows(this.products);
             },
             error: (error) => console.error('Error fetching products:', error)
 
         });
 
     }
+    private buildCategoryRows(products: any[]): { name: string; products: any[] }[] {
+        const groupedProducts = new Map<string, any[]>();
+
+        products.forEach((product) => {
+            const categoryName =
+                product.category?.name ||
+                product.categoryName ||
+                product.category ||
+                product.productCategory?.name ||
+                'All Products';
+
+            if (!groupedProducts.has(categoryName)) {
+                groupedProducts.set(categoryName, []);
+            }
+
+            groupedProducts.get(categoryName)?.push(product);
+        });
+
+        return Array.from(groupedProducts.entries()).map(([name, grouped]) => ({
+            name,
+            products: grouped
+        }));
+    }
+
     onAddToCart(product_id: number) {
         const token = localStorage.getItem('token') || localStorage.getItem('auth_token');
         if (!token) {

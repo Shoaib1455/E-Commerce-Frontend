@@ -1,3 +1,18 @@
+.hero-section a,
+.category-band a,
+.promo-strip a,
+.product-feed a,
+.hero-section a:hover,
+.category-band a:hover,
+.promo-strip a:hover,
+.product-feed a:hover,
+.hero-section a:focus,
+.category-band a:focus,
+.promo-strip a:focus,
+.product-feed a:focus {
+    text-decoration: none;
+}
+
 .hero-section {
     background: linear-gradient(135deg, #fff7ed 0%, #ffffff 45%, #e0f2fe 100%);
     padding: 4.5rem 0 3rem;
@@ -26,6 +41,56 @@ h1 {
     color: #526070;
     font-size: 1.12rem;
     line-height: 1.7;
+}
+
+.hero-actions {
+    margin-top: 1.5rem;
+}
+
+.hero-btn {
+    min-height: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.45rem;
+    border-radius: 8px;
+    color: #ffffff;
+    font-weight: 800;
+    line-height: 1;
+    text-decoration: none;
+    box-shadow: 0 12px 26px rgba(15, 23, 42, 0.16);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+}
+
+.hero-btn:hover,
+.hero-btn:focus {
+    color: #ffffff;
+    text-decoration: none;
+    transform: translateY(-2px);
+}
+
+.hero-btn-primary {
+    background: #dc3545;
+    border: 1px solid #dc3545;
+}
+
+.hero-btn-primary:hover,
+.hero-btn-primary:focus {
+    background: #b02a37;
+    border-color: #b02a37;
+    box-shadow: 0 16px 30px rgba(176, 42, 55, 0.26);
+}
+
+.hero-btn-secondary {
+    background: #101828;
+    border: 1px solid #101828;
+}
+
+.hero-btn-secondary:hover,
+.hero-btn-secondary:focus {
+    background: #dc3545;
+    border-color: #dc3545;
+    box-shadow: 0 16px 30px rgba(220, 53, 69, 0.24);
 }
 
 .hero-board {
