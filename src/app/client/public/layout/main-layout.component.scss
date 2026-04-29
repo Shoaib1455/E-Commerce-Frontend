@@ -1,107 +1,62 @@
-nb-layout,
-nb-layout-column,
-nb-layout-header {
-    // 🔑 Forces the main structural elements to take full viewport width
-    max-width: 100vw !important;
-    width: 100% !important;
+.store-header {
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    z-index: 1020;
 }
 
-/* This targets the internal wrapper that limits content width */
+.navbar-brand {
+    color: #dc3545;
+    font-size: 1.45rem;
+    letter-spacing: 0;
+}
 
-nb-layout-header ::ng-deep nav {
-    max-width: 100% !important;
-    width: 100% !important;
+.nav-link {
+    color: #445066;
+    font-weight: 600;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #dc3545;
+}
+
+.icon-btn {
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
     align-items: center;
-    box-shadow: none;
+    justify-content: center;
+    border-radius: 50%;
 }
 
-/* Ensure the layout column itself doesn't have restricting padding */
-nb-layout-column {
-    padding: 0 !important;
+.search-strip {
+    box-shadow: 0 14px 26px rgba(15, 23, 42, 0.08);
 }
 
-// Target the specific header class used in your HTML
-.header-row {
-    // Ensure the header content spans the full width and uses flex for layout
-    width: 100%;
-    display: flex;
-    justify-content: space-between; // Pushes elements apart
-    align-items: center;
-    padding: 0 2rem; // Horizontal padding for spacing
-
-
-    // Override the default header background/color if needed
-    // background-color: #007bff; // Example Blue
-    // color: white;
-
-    .header-content {
-        width: 100%;
-        display: flex;
-        // justify-content: space-between;
-        align-items: center;
-        gap: 1rem; // Space between title and navigation
-        box-shadow: none;
-    }
-
-    .store-title {
-        // Style your h1/title
-        font-size: 1.5rem;
-        margin: 0;
-        font-weight: 700;
-        color: var(--color-primary-500); // Use a Nebular variable
-        width: 20%;
-        box-shadow: none;
-    }
-
-    .main-navigation {
-        display: flex;
-        gap: 1rem; // Space between navigation buttons
-        justify-content: space-evenly;
-        white-space: nowrap;
-    }
-
-    .right-controls {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem; // Space between Sign In and Admin button
-    }
+main {
+    min-height: calc(100vh - 190px);
 }
 
-:ng-deep nb-layout-header .layout-content {
-    // Crucial: Override the max-width constraint that Nebular often applies
-    max-width: 100% !important;
-    width: 100% !important;
-    padding: 0 !important; // Removes padding that prevents edge-to-edge content
+.store-footer {
+    background: #101828;
+    color: #f8fafc;
+    padding: 2rem 0;
 }
 
-// Ensure the main content area has some padding
-nb-layout-column {
-    padding: 2rem 3rem;
-    // You might want to center the content or limit its width
-    max-width: 1400px;
-    // margin: 0 auto;
+.store-footer small,
+.store-footer a {
+    color: #cbd5e1;
 }
 
-.full-width-search-bar {
-    display: flex;
-    flex-grow: 1;
-    width: 100%;
+.store-footer a:hover {
+    color: #ffffff;
 }
 
-// Mobile Responsiveness for the header
-@media (max-width: 992px) {
-    .header-row {
-        padding: 0 1rem;
+@media (max-width: 575.98px) {
+    .search-strip .container-xl {
+        flex-direction: column;
     }
 
-    // Adjust layout for smaller screens
-    .header-content {
-        gap: 0.5rem; // Reduce space
-    }
-
-    .main-navigation {
-        // Often, navigation is hidden or changed to a menu icon on mobile
-        display: none;
-        // You would typically use a responsive Nebular menu component here
+    .header-actions {
+        justify-content: space-between;
     }
 }

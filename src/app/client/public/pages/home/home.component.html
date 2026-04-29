@@ -1,63 +1,125 @@
-<div class="home-page-container">
-
-    <div class="top-section-grid">
-
-        <nb-card class="categories-card">
-            <nb-card-header>🛒 Product Categories</nb-card-header>
-            <nb-list>
-                <nb-list-item routerLink="/products/electronics">Electronics</nb-list-item>
-                <nb-list-item routerLink="/products/fashion">Fashion</nb-list-item>
-                <nb-list-item routerLink="/products/home">Home & Garden</nb-list-item>
-                <nb-list-item routerLink="/products/beauty">Health & Beauty</nb-list-item>
-                <nb-list-item routerLink="/products/sports">Sports & Outdoors</nb-list-item>
-            </nb-list>
-        </nb-card>
-
-        <nb-card class="carousel-card">
-            <div class="carousel-placeholder">Main Promotional Banner Area</div>
-        </nb-card>
-
-        <div class="service-cards-group">
-            <nb-card size="small"> Top Vouchers</nb-card>
-            <nb-card size="small"> Flash Sale</nb-card>
-            <nb-card size="small"> Coin Rewards</nb-card>
-        </div>
-
-    </div>
-
-    <hr>
-
-    <div class="product-feed-section">
-        <h2 class="section-title"> Recommended for You</h2>
-
-        <div class="product-grid">
-
-            <nb-card class="product-card" *ngFor="let product of products">
-                <div class="product-image-container">
-                    <img [src]="product.imageUrl" alt="Product Image" />
+<section class="hero-section">
+    <div class="container-xl">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-6">
+                <span class="eyebrow">Spring store event</span>
+                <h1>Fresh finds for every cart.</h1>
+                <p class="hero-copy">
+                    Shop daily essentials, new electronics, fashion picks, and home upgrades with clear pricing and
+                    quick checkout.
+                </p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a class="btn btn-danger btn-lg px-4" href="#recommended">Shop now</a>
+                    <a class="btn btn-outline-dark btn-lg px-4" routerLink="/seller-login">Start selling</a>
                 </div>
+            </div>
 
-                <nb-card-body>
-                    <p class="product-name">
-                        {{product.name}}
-                    </p>
-
-                    <div class="pricing-details">
-
-                        <span class="current-price text-danger">${{product.price}}</span>
-
-                        <span class="deleted-price text-hint">${{product.price+(product.price*0.27)}}</span>
-
-                        <span class="discount-badge text-success">-27%</span>
+            <div class="col-lg-6">
+                <div class="hero-board">
+                    <div class="deal-card main-deal">
+                        <span>Deal of the day</span>
+                        <strong>Up to 35% off</strong>
+                        <small>Selected electronics and accessories</small>
                     </div>
-                </nb-card-body>
-
-                <nb-card-footer>
-                    <button nbButton status="primary" (click)="onAddToCart(product.id)" size="small">Add to
-                        Cart</button>
-                </nb-card-footer>
-            </nb-card>
-
+                    <div class="deal-card">
+                        <span>Fast delivery</span>
+                        <strong>48 hours</strong>
+                    </div>
+                    <div class="deal-card">
+                        <span>Secure checkout</span>
+                        <strong>Card or COD</strong>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+</section>
+
+<section class="category-band">
+    <div class="container-xl">
+        <div class="section-heading">
+            <span>Browse by category</span>
+            <h2>Popular departments</h2>
+        </div>
+
+        <div class="row g-3">
+            <div class="col-6 col-md-4 col-lg" *ngFor="let category of ['Electronics', 'Fashion', 'Home', 'Beauty', 'Sports']">
+                <a class="category-tile" routerLink="/public">
+                    <span class="category-icon">{{ category.charAt(0) }}</span>
+                    <strong>{{ category }}</strong>
+                    <small>Shop collection</small>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="promo-strip">
+    <div class="container-xl">
+        <div class="row g-3">
+            <div class="col-md-4">
+                <div class="service-tile">
+                    <strong>Top vouchers</strong>
+                    <span>Save more on checkout</span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service-tile">
+                    <strong>Flash sale</strong>
+                    <span>Limited-time price drops</span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service-tile">
+                    <strong>Buyer protection</strong>
+                    <span>Order updates and easy support</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="product-feed" id="recommended">
+    <div class="container-xl">
+        <div class="section-heading d-flex flex-column flex-md-row justify-content-between gap-2">
+            <div>
+                <span>Recommended for you</span>
+                <h2>Fresh picks from the store</h2>
+            </div>
+            <a class="btn btn-outline-secondary align-self-md-end" routerLink="/public">View all</a>
+        </div>
+
+        <div class="row g-4" *ngIf="products.length; else loadingProducts">
+            <div class="col-6 col-md-4 col-lg-3" *ngFor="let product of products">
+                <article class="product-card h-100">
+                    <a class="product-image" [routerLink]="['/product', product.id]">
+                        <img [src]="product.imageUrl" [alt]="product.name || 'Product image'">
+                        <span class="discount-pill">-27%</span>
+                    </a>
+
+                    <div class="product-content">
+                        <a class="product-name" [routerLink]="['/product', product.id]">{{ product.name }}</a>
+                        <div class="rating-row">
+                            <span>4.8 rating</span>
+                            <small>In stock</small>
+                        </div>
+                        <div class="price-row">
+                            <strong>PKR {{ product.price | number }}</strong>
+                            <del>PKR {{ product.price + (product.price * 0.27) | number }}</del>
+                        </div>
+                        <button class="btn btn-danger w-100" type="button" (click)="onAddToCart(product.id)">
+                            Add to cart
+                        </button>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <ng-template #loadingProducts>
+            <div class="empty-state">
+                <div class="spinner-border text-danger" role="status" aria-hidden="true"></div>
+                <span>Loading products...</span>
+            </div>
+        </ng-template>
+    </div>
+</section>

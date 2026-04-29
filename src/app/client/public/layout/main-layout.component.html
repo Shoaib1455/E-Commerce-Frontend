@@ -1,94 +1,62 @@
-<nb-layout>
+<header class="store-header sticky-top">
+    <nav class="navbar navbar-expand-lg bg-white border-bottom">
+        <div class="container-xl">
+            <a class="navbar-brand fw-bold" routerLink="/public">ShopSphere</a>
 
-    <nb-layout-header class="header-row">
-        <div class="header-content">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#storeNav"
+                aria-controls="storeNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-            <h1 class="store-title text-danger"> E-Commerce </h1>
+            <div class="collapse navbar-collapse" id="storeNav">
+                <ul class="navbar-nav mx-lg-auto gap-lg-2">
+                    <li class="nav-item"><a class="nav-link active" routerLink="/public">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/public">Shop</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/public">Deals</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/public">New Arrivals</a></li>
+                </ul>
 
-
-            <nav class="main-navigation">
-                <a nbButton appearance="ghost" routerLink="/about">Home</a>
-                <a nbButton appearance="ghost" routerLink="/products">Products</a>
-                <a nbButton appearance="ghost" routerLink="/about">About</a>
-                <a nbButton appearance="ghost" routerLink="/about">Contact</a>
-
-            </nav>
-
-
-            <div class="right-controls">
-                <!-- <button nbButton status="basic" routerLink="/login" size="small">
-                    Sign In
-                </button>
-                <button nbButton status="primary" routerLink="/admin" size="small" class="admin-btn">
-                    Go to Admin
-                </button> -->
-                <button nbButton appearance="ghost" (click)="openSearchBar()" size="medium" aria-label="Search">
-                    <nb-icon icon="search-outline"></nb-icon>
-                </button>
-
-                <button nbButton appearance="ghost" size="medium" routerLink="/account/cart" aria-label="Shopping Cart">
-                    <nb-icon icon="shopping-cart-outline"></nb-icon>
-                    <span class="cart-badge">3</span>
-                </button>
-
-                <button nbButton appearance="ghost" size="medium" routerLink="/account/profile"
-                    aria-label="User Account">
-                    <nb-icon icon="person-outline"></nb-icon>
-                </button>
+                <div class="header-actions d-flex align-items-center gap-2 mt-3 mt-lg-0">
+                    <button class="btn btn-light icon-btn" type="button" (click)="toggleSearchBar()"
+                        aria-label="Search products">
+                        <nb-icon icon="search-outline"></nb-icon>
+                    </button>
+                    <a class="btn btn-light icon-btn position-relative" routerLink="/cart" aria-label="Shopping cart">
+                        <nb-icon icon="shopping-cart-outline"></nb-icon>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            3
+                        </span>
+                    </a>
+                    <a class="btn btn-dark px-3" routerLink="/Auth">Sign in</a>
+                </div>
             </div>
         </div>
-    </nb-layout-header>
+    </nav>
 
-    <div class="full-width-search-bar-wrapper" *ngIf="isSearchBarVisible">
-        <div class="full-width-search-bar">
-            <input type="text" class="search-bar" nbInput placeholder="What are you looking for?"
+    <form class="search-strip border-bottom bg-white" *ngIf="isSearchBarVisible" (ngSubmit)="performSearch()">
+        <div class="container-xl d-flex gap-2 py-3">
+            <input class="form-control form-control-lg" type="search" placeholder="Search products, brands, categories"
                 [(ngModel)]="searchQuery" name="search" autofocus>
+            <button class="btn btn-danger px-4" type="submit">Search</button>
+            <button class="btn btn-outline-secondary" type="button" (click)="closeSearchBar()">Close</button>
+        </div>
+    </form>
+</header>
 
-            <button nbButton status="primary" (click)="performSearch()">
-                <nb-icon icon="search-outline"></nb-icon> Search
-            </button>
+<main>
+    <router-outlet></router-outlet>
+</main>
 
-            <button nbButton appearance="ghost" (click)="closeSearchBar()" aria-label="Close Search">
-                <nb-icon icon="close-outline"></nb-icon>
-            </button>
+<footer class="store-footer">
+    <div class="container-xl d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+        <div>
+            <div class="fw-bold">ShopSphere</div>
+            <small>Quality products, simple checkout, fast delivery.</small>
+        </div>
+        <div class="footer-links d-flex gap-3">
+            <a routerLink="/public">Support</a>
+            <a routerLink="/public">Shipping</a>
+            <a routerLink="/public">Returns</a>
         </div>
     </div>
-
-    <nb-layout-column>
-        <div class="full-width-search-bar-wrapper" *ngIf="isSearchBarVisible">
-            <div class="full-width-search-bar">
-                <input type="text" nbInput placeholder="What are you looking for?" [(ngModel)]="searchQuery"
-                    name="search" autofocus>
-
-                <button nbButton status="primary" (click)="performSearch()">
-                    <nb-icon icon="search-outline"></nb-icon> Search
-                </button>
-
-                <button nbButton appearance="ghost" (click)="closeSearchBar()" aria-label="Close Search">
-                    <nb-icon icon="close-outline"></nb-icon>
-                </button>
-            </div>
-        </div>
-        <!-- <form (ngSubmit)="performSearch()">
-            <nb-form-field>
-                <nb-icon nbPrefix icon="search-outline"></nb-icon>
-
-                <input type="text" nbInput placeholder="What are you looking for?" [(ngModel)]="searchQuery"
-                    name="search" autofocus>
-
-                <button type="button" nbSuffix nbButton ghost size="small" (click)="closeSearchOverlay()"
-                    aria-label="Close Search">
-                    <nb-icon icon="close-outline"></nb-icon>
-                </button>
-            </nb-form-field>
-        </form> -->
-        <!-- -->
-        <router-outlet></router-outlet>
-
-    </nb-layout-column>
-
-    <nb-layout-footer>
-        <p>&copy; 2025 E-Commerce Site</p>
-    </nb-layout-footer>
-
-</nb-layout>
+</footer>
