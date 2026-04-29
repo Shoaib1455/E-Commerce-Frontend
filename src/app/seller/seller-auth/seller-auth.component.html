@@ -1,47 +1,56 @@
-<div class="login-page-container bg-primary">
-    <nb-card class="login-card">
+<section class="seller-auth-page">
+    <div class="seller-auth-shell">
+        <aside class="seller-panel">
+            <a class="brand-pill" routerLink="/public">ShopSphere</a>
+            <div class="panel-copy">
+                <span>Seller portal</span>
+                <h1>Manage products, orders, and growth from one place.</h1>
+                <p>Sign in to update listings, track customer demand, and keep your storefront ready for buyers.</p>
+            </div>
+            <div class="seller-stats">
+                <div>
+                    <strong>24/7</strong>
+                    <span>Store access</span>
+                </div>
+                <div>
+                    <strong>Live</strong>
+                    <span>Order updates</span>
+                </div>
+            </div>
+        </aside>
 
-        <nb-card-header class="login-header">
-            <h1 class="seller-portal-title bg-primary">Seller Portal Login</h1>
-            <p class="subtitle text-hint">Manage your products and orders</p>
-        </nb-card-header>
+        <div class="seller-card">
+            <div class="seller-card-header">
+                <span>Sign in</span>
+                <h2>Seller account</h2>
+                <p>Use your registered seller email to continue.</p>
+            </div>
 
-        <nb-card-body>
-            <form (ngSubmit)="login()">
+            <form class="seller-form" (ngSubmit)="login()">
+                <label for="email">Email address</label>
+                <input class="form-control form-control-lg" id="email" type="email"
+                    placeholder="seller@example.com" [(ngModel)]="loginData.email" name="email" required>
 
-                <div class="form-group">
-                    <label for="email" class="label text-small mb-4">Email Address</label>
-                    <input fullWidth id="email" type="email" placeholder="Enter your registered email"
-                        [(ngModel)]="loginData.email" name="email" required>
+                <label for="password">Password</label>
+                <input class="form-control form-control-lg" id="password" type="password"
+                    placeholder="Enter your password" [(ngModel)]="loginData.password" name="password" required>
+
+                <div class="form-meta">
+                    <label class="remember-control">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="loginData.rememberMe"
+                            name="remember">
+                        <span>Remember me</span>
+                    </label>
+                    <a routerLink="/seller/forgot-password">Forgot password?</a>
                 </div>
 
-                <div class="form-group">
-                    <label for="password" class="label text-small">Password</label>
-                    <input fullWidth id="password" type="password" placeholder="Enter your password"
-                        [(ngModel)]="loginData.password" name="password" required>
-                </div>
-
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <nb-checkbox [(ngModel)]="loginData.rememberMe" name="remember">
-                        Remember Me
-                    </nb-checkbox>
-                    <a routerLink="/seller/forgot-password" class="forgot-link text-small">
-                        Forgot Password?
-                    </a>
-                </div>
-
-                <button nbButton fullWidth status="primary" class="bg-primary text-white" size="large" type="submit">
-                    Sign In
-                </button>
+                <button class="theme-submit" type="submit">Sign in</button>
             </form>
-        </nb-card-body>
 
-        <nb-card-footer class="text-center flex">
-            <p class=" text-hint text-small">
-                Don't have an account?
-                <a routerLink="/seller-register" class="register-link">Register Now</a>
-            </p>
-        </nb-card-footer>
-
-    </nb-card>
-</div>
+            <div class="seller-footer">
+                <span>New seller?</span>
+                <a routerLink="/seller-register">Register now</a>
+            </div>
+        </div>
+    </div>
+</section>

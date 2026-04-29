@@ -54,6 +54,41 @@
     </div>
 </section>
 
+<section class="category-products">
+    <div class="container-xl">
+        <div class="section-heading">
+            <span>Shop by department</span>
+            <h2>Products by category</h2>
+        </div>
+
+        <div class="category-product-row" *ngFor="let category of ['Electronics', 'Fashion', 'Home Essentials']">
+            <div class="category-row-header">
+                <div>
+                    <span>Featured category</span>
+                    <h3>{{ category }}</h3>
+                </div>
+                <a routerLink="/public">View all</a>
+            </div>
+
+            <div class="row-scroll">
+                <article class="mini-product-card" *ngFor="let product of products | slice:0:6">
+                    <a class="mini-product-image" [routerLink]="['/product', product.id || product.productId || product.product_id]">
+                        <img [src]="product.imageUrl" [alt]="product.name || 'Product image'">
+                    </a>
+
+                    <div class="mini-product-body">
+                        <a class="mini-product-name" [routerLink]="['/product', product.id || product.productId || product.product_id]">{{ product.name }}</a>
+                        <strong>PKR {{ product.price | number }}</strong>
+                        <button class="btn btn-sm btn-danger" type="button" (click)="onAddToCart(product.id || product.productId || product.product_id)">
+                            Add to cart
+                        </button>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="promo-strip">
     <div class="container-xl">
         <div class="row g-3">
@@ -92,13 +127,13 @@
         <div class="row g-4" *ngIf="products.length; else loadingProducts">
             <div class="col-6 col-md-4 col-lg-3" *ngFor="let product of products">
                 <article class="product-card h-100">
-                    <a class="product-image" [routerLink]="['/product', product.id]">
+                    <a class="product-image" [routerLink]="['/product', product.id || product.productId || product.product_id]">
                         <img [src]="product.imageUrl" [alt]="product.name || 'Product image'">
                         <span class="discount-pill">-27%</span>
                     </a>
 
                     <div class="product-content">
-                        <a class="product-name" [routerLink]="['/product', product.id]">{{ product.name }}</a>
+                        <a class="product-name" [routerLink]="['/product', product.id || product.productId || product.product_id]">{{ product.name }}</a>
                         <div class="rating-row">
                             <span>4.8 rating</span>
                             <small>In stock</small>
@@ -107,7 +142,7 @@
                             <strong>PKR {{ product.price | number }}</strong>
                             <del>PKR {{ product.price + (product.price * 0.27) | number }}</del>
                         </div>
-                        <button class="btn btn-danger w-100" type="button" (click)="onAddToCart(product.id)">
+                        <button class="btn btn-danger w-100" type="button" (click)="onAddToCart(product.id || product.productId || product.product_id)">
                             Add to cart
                         </button>
                     </div>

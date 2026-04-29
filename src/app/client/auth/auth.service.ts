@@ -17,7 +17,7 @@ export class AuthService {
 
     // optional register method; backend endpoint name may vary
     postRegister(userdata: any): Observable<HttpResponse<any>> {
-        const url = environment.backendUrl + 'usermanagement/Register';
+        const url = environment.backendUrl + 'usermanagement/CreateUser';
         return this.http.post<any>(url, userdata, { observe: 'response' });
     }
 

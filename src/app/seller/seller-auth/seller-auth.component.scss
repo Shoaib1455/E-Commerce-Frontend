@@ -1,84 +1,212 @@
-.login-page-container {
-    // 🔑 Centers the content vertically and horizontally on the page
+.seller-auth-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 45%, #fff1f2 100%);
+}
+
+.seller-auth-shell {
+    width: min(1120px, 100%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 0.95fr;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 8px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+}
+
+.seller-panel {
+    min-height: 620px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem;
+    color: #ffffff;
+    background: linear-gradient(160deg, #111827 0%, #334155 100%);
+}
+
+.brand-pill {
+    width: fit-content;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.55rem 1.1rem;
+    color: #ffffff;
+    background: linear-gradient(135deg, #dc3545, #b02a37);
+    border-radius: 8px;
+    font-size: 1.4rem;
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: 0 10px 22px rgba(220, 53, 69, 0.24);
+}
+
+.brand-pill:hover,
+.brand-pill:focus,
+.form-meta a:hover,
+.form-meta a:focus,
+.seller-footer a:hover,
+.seller-footer a:focus {
+    text-decoration: none;
+}
+
+.panel-copy span,
+.seller-card-header span {
+    color: #dc3545;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.panel-copy h1 {
+    max-width: 520px;
+    margin: 0.7rem 0 1rem;
+    font-size: clamp(2.1rem, 4vw, 3.8rem);
+    font-weight: 800;
+    line-height: 1;
+}
+
+.panel-copy p {
+    max-width: 480px;
+    color: #cbd5e1;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.seller-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem;
+}
+
+.seller-stats div {
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 8px;
+}
+
+.seller-stats strong,
+.seller-stats span {
+    display: block;
+}
+
+.seller-stats strong {
+    font-size: 1.35rem;
+}
+
+.seller-stats span {
+    color: #cbd5e1;
+}
+
+.seller-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3rem;
+}
+
+.seller-card-header {
+    margin-bottom: 1.5rem;
+}
+
+.seller-card-header h2 {
+    margin: 0.35rem 0 0.5rem;
+    color: #111827;
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.seller-card-header p {
+    margin: 0;
+    color: #667085;
+}
+
+.seller-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.seller-form label {
+    color: #344054;
+    font-weight: 700;
+}
+
+.form-control {
+    border-radius: 8px;
+    border-color: #d0d5dd;
+}
+
+.form-control:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.15);
+}
+
+.form-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 0.4rem;
+}
+
+.remember-control {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin: 0;
+}
+
+.form-meta a,
+.seller-footer a {
+    color: #dc3545;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.theme-submit {
+    min-height: 50px;
+    margin-top: 0.7rem;
+    color: #ffffff;
+    background: #dc3545;
+    border: 1px solid #dc3545;
+    border-radius: 8px;
+    font-weight: 800;
+    box-shadow: 0 12px 26px rgba(220, 53, 69, 0.2);
+}
+
+.theme-submit:hover,
+.theme-submit:focus {
+    background: #b02a37;
+    border-color: #b02a37;
+}
+
+.seller-footer {
     display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    // Uses a slightly off-white background to separate the card from the rest of the app
-    //background-color: var(--background-basic-color-2);
-    padding: 1rem; // Ensures spacing on very small screens
+    gap: 0.4rem;
+    margin-top: 1.4rem;
+    color: #667085;
 }
 
-.login-card {
-    // Fixed width for a clear, focused login experience on desktop
-    width: 100%;
-    max-width: 450px;
-
-    // Optional: Add a subtle shadow for depth
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    border-radius: var(--border-radius);
-}
-
-.login-header {
-    text-align: center;
-    padding-top: 1.5rem;
-    padding-bottom: 0.5rem;
-    // Removes the default border Nebular might add between header and body
-    border-bottom: none !important;
-}
-
-.seller-portal-title {
-    margin-bottom: 0.2rem;
-    font-size: 1.8rem;
-    font-weight: 600;
-    // color: var(--color-primary-default);
-}
-
-.subtitle {
-    font-size: 0.9rem;
-    color: var(--text-hint-color);
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-
-    .label {
-        display: block;
-        margin-bottom: 0.4rem;
-        font-weight: 500;
-        color: var(--text-basic-color);
+@media (max-width: 900px) {
+    .seller-auth-page {
+        padding: 1rem;
     }
-}
 
-// Styling for the Forgot Password/Remember Me line
-.d-flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-}
-
-.forgot-link,
-.register-link {
-    text-decoration: none;
-    font-weight: 500;
-    color: var(--color-primary-default);
-
-    &:hover {
-        text-decoration: underline;
+    .seller-auth-shell {
+        grid-template-columns: 1fr;
     }
-}
 
-// Ensure the Sign In button uses full width as specified in HTML
-button[nbButton][fullWidth] {
-    margin-top: 1rem;
-}
+    .seller-panel {
+        min-height: 360px;
+    }
 
-// Media Query for Mobile Responsiveness
-@media (max-width: 576px) {
-    .login-card {
-        // Allows the card to take up more screen space on small devices
-        max-width: 90%;
-        margin: 1rem auto;
+    .seller-card {
+        padding: 2rem;
     }
 }

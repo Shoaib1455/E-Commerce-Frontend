@@ -1,42 +1,46 @@
-<div class="login-page-container bg-primary">
-    <nb-card class="login-card">
+<section class="seller-register-page">
+    <div class="register-shell">
+        <aside class="register-panel">
+            <a class="brand-pill" routerLink="/public">ShopSphere</a>
+            <div class="panel-copy">
+                <span>Seller sign up</span>
+                <h1>Open your store and start listing products.</h1>
+                <p>Create a seller account to manage inventory, receive orders, and build your product catalog.</p>
+            </div>
+            <div class="benefit-list">
+                <div>Catalog tools</div>
+                <div>Order dashboard</div>
+                <div>Secure access</div>
+            </div>
+        </aside>
 
-        <nb-card-header class="login-header">
-            <h1 class="seller-portal-title bg-primary">Seller Registration Portal</h1>
+        <div class="register-card">
+            <div class="register-card-header">
+                <span>Create account</span>
+                <h2>Seller registration</h2>
+                <p>Enter your basic details to create your seller profile.</p>
+            </div>
 
-        </nb-card-header>
+            <form class="register-form" (ngSubmit)="Register()">
+                <label for="seller-name">Name</label>
+                <input class="form-control form-control-lg" id="seller-name" type="text" placeholder="Your name"
+                    [(ngModel)]="registrationDetails.Name" name="Name" required>
 
-        <nb-card-body>
-            <form (ngSubmit)="Register()">
-                <div class="form-group">
-                    <label for="email" class="label text-small mb-4">Name</label>
-                    <input fullWidth id="email" type="email" placeholder="Enter your registered email"
-                        [(ngModel)]="registrationDetails.Name" name="Name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email" class="label text-small mb-4">Email Address</label>
-                    <input fullWidth id="email" type="email" placeholder="Enter your registered email"
-                        [(ngModel)]="registrationDetails.email" name="email" required>
-                </div>
+                <label for="seller-email">Email address</label>
+                <input class="form-control form-control-lg" id="seller-email" type="email"
+                    placeholder="seller@example.com" [(ngModel)]="registrationDetails.email" name="email" required>
 
-                <div class="form-group">
-                    <label for="password" class="label text-small">Password</label>
-                    <input fullWidth id="password" type="password" placeholder="Enter your password"
-                        [(ngModel)]="registrationDetails.password" name="password" required>
-                </div>
+                <label for="seller-password">Password</label>
+                <input class="form-control form-control-lg" id="seller-password" type="password"
+                    placeholder="Create a password" [(ngModel)]="registrationDetails.password" name="password" required>
 
-                <button nbButton fullWidth status="primary" class="bg-primary text-white" size="large" type="submit">
-                    Sign Up
-                </button>
+                <button class="theme-submit" type="submit">Sign up</button>
             </form>
-        </nb-card-body>
 
-        <!-- <nb-card-footer class="text-center flex">
-            <p class=" text-hint text-small">
-                Don't have an account?
-                <a routerLink="/seller/register" class="register-link">Register Now</a>
-            </p>
-        </nb-card-footer> -->
-
-    </nb-card>
-</div>
+            <div class="register-footer">
+                <span>Already registered?</span>
+                <a routerLink="/seller-login">Sign in</a>
+            </div>
+        </div>
+    </div>
+</section>

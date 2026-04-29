@@ -1,20 +1,42 @@
-<nb-layout>
-    <nb-layout-column>
-        <div class="center-container">
-            <nb-card class="login-card">
-                <nb-card-header>
-                    Log In
-                </nb-card-header>
-                <nb-card-body class="login-form">
-                    <input nbInput fullWidth type="email" placeholder="Email" class="form-input"
-                        [(ngModel)]="userdata.email" />
-                    <input nbInput fullWidth type="password" placeholder="Password" class="form-input"
-                        [(ngModel)]="userdata.Password" />
-                    <button nbButton fullWidth status="primary" (click)="login()" class="login-button">
-                        Sign In
-                    </button>
-                </nb-card-body>
-            </nb-card>
+<section class="auth-page user-auth">
+    <div class="auth-shell">
+        <aside class="auth-panel">
+            <a class="brand-pill" routerLink="/public">ShopSphere</a>
+            <div class="panel-copy">
+                <span>User portal</span>
+                <h1>Welcome back to your store account.</h1>
+                <p>Track orders, save favorites, manage your profile, and move through checkout faster.</p>
+            </div>
+            <div class="benefit-list">
+                <div>Fast checkout</div>
+                <div>Order tracking</div>
+                <div>Saved delivery details</div>
+            </div>
+        </aside>
+
+        <div class="auth-card">
+            <div class="auth-card-header">
+                <span>Sign in</span>
+                <h2>Access your account</h2>
+                <p>Use your email and password to continue shopping.</p>
+            </div>
+
+            <form class="auth-form">
+                <label for="user-email">Email address</label>
+                <input id="user-email" class="form-control form-control-lg" type="email" placeholder="you@example.com"
+                    [(ngModel)]="userdata.email" name="email" />
+
+                <label for="user-password">Password</label>
+                <input id="user-password" class="form-control form-control-lg" type="password"
+                    placeholder="Enter your password" [(ngModel)]="userdata.Password" name="password" />
+
+                <button class="theme-submit" type="button" (click)="login()">Sign in</button>
+            </form>
+
+            <div class="auth-footer">
+                <span>New customer?</span>
+                <a routerLink="/public">Create an account</a>
+            </div>
         </div>
-    </nb-layout-column>
-</nb-layout>
+    </div>
+</section>

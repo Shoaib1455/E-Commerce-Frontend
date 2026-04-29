@@ -1,29 +1,46 @@
-<nb-card>
-    <nb-card-header>
-        <nb-select [(selected)]="mode" (selectedChange)="switchMode($event)">
-            <nb-option value="login">Login</nb-option>
-            <nb-option value="register">Register</nb-option>
-        </nb-select>
-    </nb-card-header>
+<div class="auth-dialog">
+    <div class="dialog-header">
+        <div>
+            <span>ShopSphere account</span>
+            <h3>{{ mode === 'login' ? 'Sign in to continue' : 'Create your account' }}</h3>
+        </div>
+        <button class="dialog-close" type="button" (click)="cancel()" aria-label="Close">&times;</button>
+    </div>
 
-    <nb-card-body>
-        <div *ngIf="mode === 'login'">
-            <input nbInput fullWidth type="email" placeholder="Email" [(ngModel)]="loginModel.email" />
-            <input nbInput fullWidth type="password" placeholder="Password" [(ngModel)]="loginModel.Password" />
+    <div class="mode-switch">
+        <button type="button" [class.active]="mode === 'login'" (click)="switchMode('login')">Sign in</button>
+        <button type="button" [class.active]="mode === 'register'" (click)="switchMode('register')">Sign up</button>
+    </div>
+
+    <div class="dialog-body">
+        <div class="dialog-form" *ngIf="mode === 'login'">
+            <label>Email address</label>
+            <input class="form-control" type="email" placeholder="you@example.com" [(ngModel)]="loginModel.email" />
+
+            <label>Password</label>
+            <input class="form-control" type="password" placeholder="Enter your password"
+                [(ngModel)]="loginModel.Password" />
         </div>
 
-        <div *ngIf="mode === 'register'">
-            <input nbInput fullWidth type="text" placeholder="Full name" [(ngModel)]="registerModel.name" />
-            <input nbInput fullWidth type="email" placeholder="Email" [(ngModel)]="registerModel.email" />
-            <input nbInput fullWidth type="password" placeholder="Password" [(ngModel)]="registerModel.password" />
+        <div class="dialog-form" *ngIf="mode === 'register'">
+            <label>Full name</label>
+            <input class="form-control" type="text" placeholder="Your name" [(ngModel)]="registerModel.name" />
+
+            <label>Email address</label>
+            <input class="form-control" type="email" placeholder="you@example.com" [(ngModel)]="registerModel.email" />
+
+            <label>Password</label>
+            <input class="form-control" type="password" placeholder="Create a password"
+                [(ngModel)]="registerModel.password" />
         </div>
 
         <div *ngIf="error" class="error">{{ error }}</div>
-    </nb-card-body>
+    </div>
 
-    <nb-card-footer class="dialog-actions">
-        <button nbButton status="basic" (click)="cancel()">Cancel</button>
-        <button nbButton status="primary" (click)="submit()" [disabled]="loading">{{ mode === 'login' ? 'Sign in' :
-            'Register' }}</button>
-    </nb-card-footer>
-</nb-card>
+    <div class="dialog-actions">
+        <button class="ghost-action" type="button" (click)="cancel()">Cancel</button>
+        <button class="theme-action" type="button" (click)="submit()" [disabled]="loading">
+            {{ mode === 'login' ? 'Sign in' : 'Sign up' }}
+        </button>
+    </div>
+</div>

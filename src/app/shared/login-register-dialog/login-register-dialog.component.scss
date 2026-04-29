@@ -1,14 +1,133 @@
-.dialog-actions {
+.auth-dialog {
+    width: min(440px, calc(100vw - 2rem));
+    padding: 1.35rem;
+    background: #ffffff;
+    border-radius: 8px;
+}
+
+.dialog-header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.dialog-header span {
+    color: #dc3545;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.dialog-header h3 {
+    margin: 0.25rem 0 0;
+    color: #111827;
+    font-size: 1.55rem;
+    font-weight: 800;
+}
+
+.dialog-close {
+    width: 38px;
+    height: 38px;
+    border: 0;
+    border-radius: 50%;
+    color: #344054;
+    background: #f2f4f7;
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.mode-switch {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;
+    padding: 0.35rem;
+    margin-bottom: 1.1rem;
+    background: #f2f4f7;
+    border-radius: 8px;
+}
+
+.mode-switch button {
+    min-height: 40px;
+    border: 0;
+    border-radius: 8px;
+    color: #667085;
+    background: transparent;
+    font-weight: 800;
+}
+
+.mode-switch button.active {
+    color: #ffffff;
+    background: #dc3545;
+    box-shadow: 0 8px 18px rgba(220, 53, 69, 0.18);
+}
+
+.dialog-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.dialog-form label {
+    color: #344054;
+    font-weight: 700;
+}
+
+.form-control {
+    min-height: 46px;
+    border-radius: 8px;
+    border-color: #d0d5dd;
+}
+
+.form-control:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.15);
 }
 
 .error {
-    color: var(--nb-theme-danger, #d9534f);
-    margin-top: 0.5rem;
+    margin-top: 0.8rem;
+    padding: 0.65rem 0.8rem;
+    color: #b02a37;
+    background: #fff1f2;
+    border-radius: 8px;
+    font-weight: 700;
 }
 
-input[nbInput] {
-    margin-bottom: 0.5rem;
+.dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.7rem;
+    margin-top: 1.25rem;
+}
+
+.ghost-action,
+.theme-action {
+    min-height: 44px;
+    padding: 0.65rem 1rem;
+    border-radius: 8px;
+    font-weight: 800;
+}
+
+.ghost-action {
+    color: #344054;
+    background: #ffffff;
+    border: 1px solid #d0d5dd;
+}
+
+.theme-action {
+    color: #ffffff;
+    background: #dc3545;
+    border: 1px solid #dc3545;
+    box-shadow: 0 10px 22px rgba(220, 53, 69, 0.18);
+}
+
+.theme-action:hover,
+.theme-action:focus {
+    background: #b02a37;
+    border-color: #b02a37;
+}
+
+.theme-action:disabled {
+    opacity: 0.7;
 }

@@ -36,14 +36,23 @@ export class ProductsComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.params.subscribe(params => {
-            const id = params['id'];
-            this.productId = id
+            const id = Number(params['id']);
+            this.productId = id;
             console.log(id);
+
+            if (id) {
+                this.loadProduct(id);
+            } else {
+                this.product = null;
+            }
         });
-        this.productservice.getproductbyid(this.productId).subscribe({
+    }
+
+    private loadProduct(productId: number): void {
+        this.productservice.getproductbyid(productId).subscribe({
             next: (data) => {
-                this.product = data.body || [];
-                this.images=data.body.multipleImagesUrl.$values || [];
+                this.product = data.body?.result || data.body || null;
+                this.images = this.product?.multipleImagesUrl?.$values || this.product?.multipleImagesUrl || [];
 
 
                 console.log(this.product);
