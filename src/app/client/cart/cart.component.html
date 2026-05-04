@@ -1,188 +1,160 @@
-<div class="cart-page-wrapper">
+<section class="cart-page">
+    <div class="container-xl">
+        <div class="cart-header">
+            <div>
+                <span>Shopping cart</span>
+                <h1>Your selected items</h1>
+                <p>Review products, confirm delivery details, and choose your payment method.</p>
+            </div>
+            <a class="continue-link" routerLink="/public">Continue shopping</a>
+        </div>
 
-    <div class="cart-container">
-        <div class="cart-items-list">
-            <nb-card>
-                <nb-card-header>
-                    <h2>Shopping Cart ({{ cartItems.length }} Items)</h2>
-                </nb-card-header>
-
-                <nb-card-body  class="cart-item" *ngFor="let item of cartItems">
-                    <div class="item-left" >
-                        <div class="product-image">
-                            <img src="{{ item.product.imageUrl }}" height="100" width="100" alt="{{ item.product.name }}">
-                        </div>
+        <div class="cart-layout">
+            <div class="cart-main">
+                <section class="content-card">
+                    <div class="card-heading">
+                        <span>Items</span>
+                        <h2>Cart summary ({{ cartItems.length }} items)</h2>
                     </div>
 
-                    <div class="item-right" >
+                    <div class="empty-cart" *ngIf="cartItems.length === 0">
+                        Your cart is empty. Add products from the store to begin checkout.
+                    </div>
+
+                    <article class="cart-item" *ngFor="let item of cartItems">
+                        <div class="product-image">
+                            <img [src]="item.product.imageUrl" [alt]="item.product.name">
+                        </div>
+
                         <div class="product-details">
-                            <h3 class="product-name">{{ item.product.name }}</h3>
-                            <!-- <p class="product-sku">SKU: {{ item.product.sku }}</p>
-                            <p class="product-seller">Sold by: {{ item.product.seller }}</p> -->
-                            <button nbButton ghost status="danger" (click)="removeItem(item.productid)">
-                                <nb-icon icon="trash-2-outline"></nb-icon> Remove
+                            <h3>{{ item.product.name }}</h3>
+                            <p>Unit price: PKR {{ item.product.price | number }}</p>
+                            <button class="remove-btn" type="button" (click)="removeItem(item.productid)">
+                                Remove
                             </button>
                         </div>
 
-                        <div class="center-items">
-                            
-                                <div class="single-item-price">
-                                        <span class="current-price">Per Qty</span><br>
-                                        <span class="current-price"> {{ item.product.price | number }}</span>
-                                
-                                </div>
-                                
-                                
+                        <div class="quantity-control">
+                            <button type="button" (click)="updateQuantity(item.productid, -1)">-</button>
+                            <input [value]="item.quantity" readonly aria-label="Quantity">
+                            <button type="button" (click)="updateQuantity(item.productid, 1)">+</button>
                         </div>
 
-                        <div class="item-actions">
-                            <div class="quantity-control">
-                                
-                                <nb-button-group size="small">
-                                    <button nbButton (click)="updateQuantity(item.productid, -1)">-</button>
-                                    <input nbInput [value]="item.quantity" readonly class="qty-display" />
-                                    <button nbButton (click)="updateQuantity(item.productid, 1)">+</button>
-                                </nb-button-group>
-                            </div>
-                                    
-                            <div class="item-price">
-                                <span class="current-price">PKR {{ item.totalPrice | number }}</span>
-                                
-                            </div>
+                        <div class="item-total">
+                            <span>Total</span>
+                            <strong>PKR {{ item.totalPrice | number }}</strong>
+                        </div>
+                    </article>
+                </section>
+
+                <section class="content-card">
+                    <div class="card-heading">
+                        <span>Delivery</span>
+                        <h2>Shipping & billing address</h2>
+                    </div>
+
+                    <label class="toggle-row">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="sameAsShipping"
+                            (ngModelChange)="onSameAsShippingChange()">
+                        <span>Billing address is the same as shipping address</span>
+                    </label>
+
+                    <div class="address-form">
+                        <h3>Shipping address</h3>
+                        <div class="form-grid">
+                            <input class="form-control" placeholder="Full name" [(ngModel)]="shippingAddress.fullName">
+                            <input class="form-control" type="number" placeholder="Phone number"
+                                [(ngModel)]="shippingAddress.phone">
+                            <input class="form-control full-row" placeholder="Street address"
+                                [(ngModel)]="shippingAddress.street">
+                            <input class="form-control" placeholder="City" [(ngModel)]="shippingAddress.city">
+                            <input class="form-control" type="number" placeholder="Postal code"
+                                [(ngModel)]="shippingAddress.postalCode">
+                            <input class="form-control" placeholder="Country" [(ngModel)]="shippingAddress.country">
+                            <input class="form-control" placeholder="State / Province"
+                                [(ngModel)]="shippingAddress.state">
                         </div>
                     </div>
-                </nb-card-body>
-            </nb-card>
 
-            <nb-card class="shipping-billing-card">
-                <nb-card-header>
-                    <h2>Shipping & Billing Address</h2>
-                </nb-card-header>
-                <nb-card-body>
-                    <div class="address-section">
-                        <div class="address-toggle">
-                            <nb-checkbox [(ngModel)]="sameAsShipping" (ngModelChange)="onSameAsShippingChange()">
-                                Same as shipping address
-                            </nb-checkbox>
-                        </div>
-
-                        <div class="address-form">
-                            <h4>Shipping Address</h4>
-                            <div class="form-row">
-                                <input nbInput placeholder="Full Name" [(ngModel)]="shippingAddress.fullName" />
-                                <input nbInput type="number" placeholder="Phone Number"
-                                    [(ngModel)]="shippingAddress.phone" />
-                            </div>
-                            <div class="form-row">
-                                <input nbInput placeholder="Street Address" [(ngModel)]="shippingAddress.street" />
-                            </div>
-                            <div class="form-row">
-                                <input nbInput placeholder="City" [(ngModel)]="shippingAddress.city" />
-                                <input nbInput type="number" placeholder="Postal Code"
-                                    [(ngModel)]="shippingAddress.postalCode" />
-                            </div>
-                            <div class="form-row">
-                                <input nbInput placeholder="Country" [(ngModel)]="shippingAddress.country" />
-                                <input nbInput placeholder="State/Province" [(ngModel)]="shippingAddress.state" />
-                            </div>
-                        </div>
-
-                        <div *ngIf="!sameAsShipping" class="address-form">
-                            <h4>Billing Address</h4>
-                            <div class="form-row">
-                                <input nbInput placeholder="Full Name" [(ngModel)]="billingAddress.fullName" />
-                                <input nbInput type="number" placeholder="Phone Number"
-                                    [(ngModel)]="billingAddress.phone" />
-                            </div>
-                            <div class="form-row">
-                                <input nbInput placeholder="Street Address" [(ngModel)]="billingAddress.street" />
-                            </div>
-                            <div class="form-row">
-                                <input nbInput placeholder="City" [(ngModel)]="billingAddress.city" />
-                                <input nbInput type="number" placeholder="Postal Code"
-                                    [(ngModel)]="billingAddress.postalCode" />
-                            </div>
-                            <div class="form-row">
-                                <input nbInput placeholder="Country" [(ngModel)]="billingAddress.country" />
-                                <input nbInput placeholder="State/Province" [(ngModel)]="billingAddress.state" />
-                            </div>
+                    <div class="address-form" *ngIf="!sameAsShipping">
+                        <h3>Billing address</h3>
+                        <div class="form-grid">
+                            <input class="form-control" placeholder="Full name" [(ngModel)]="billingAddress.fullName">
+                            <input class="form-control" type="number" placeholder="Phone number"
+                                [(ngModel)]="billingAddress.phone">
+                            <input class="form-control full-row" placeholder="Street address"
+                                [(ngModel)]="billingAddress.street">
+                            <input class="form-control" placeholder="City" [(ngModel)]="billingAddress.city">
+                            <input class="form-control" type="number" placeholder="Postal code"
+                                [(ngModel)]="billingAddress.postalCode">
+                            <input class="form-control" placeholder="Country" [(ngModel)]="billingAddress.country">
+                            <input class="form-control" placeholder="State / Province"
+                                [(ngModel)]="billingAddress.state">
                         </div>
                     </div>
-                </nb-card-body>
-            </nb-card>
+                </section>
 
-            <nb-card class="payment-methods-card">
-                <nb-card-header>
-                    <h2>Payment Method</h2>
-                </nb-card-header>
-                <nb-card-body>
-                    <div class="payment-options">
-                        <nb-radio-group [(ngModel)]="selectedPaymentMethod">
-                            <div class="payment-option">
+                <section class="content-card">
+                    <div class="card-heading">
+                        <span>Payment</span>
+                        <h2>Payment method</h2>
+                    </div>
 
-                                <nb-radio [(ngModel)]="selectedPaymentMethod" value="cod" name="payment">
-                                    <nb-icon icon="home-outline" pack="eva"></nb-icon>
-                                    Cash on Delivery
-                                </nb-radio>
-                                <p class="payment-description">Pay when your order arrives at your doorstep</p>
+                    <div class="payment-grid">
+                        <label class="payment-option" [class.active]="selectedPaymentMethod === 'cod'">
+                            <input type="radio" value="cod" name="payment" [(ngModel)]="selectedPaymentMethod">
+                            <div>
+                                <strong>Cash on delivery</strong>
+                                <span>Pay when your order arrives at your doorstep.</span>
                             </div>
+                        </label>
 
-                            <div class="payment-option">
-                                <nb-radio [(ngModel)]="selectedPaymentMethod" value="card" name="payment">
-                                    <nb-icon icon="credit-card-outline" pack="eva"></nb-icon>
-                                    Credit Card
-                                </nb-radio>
-                                <p class="payment-description">Secure payment via Visa, Mastercard, or other cards</p>
+                        <label class="payment-option" [class.active]="selectedPaymentMethod === 'card'">
+                            <input type="radio" value="card" name="payment" [(ngModel)]="selectedPaymentMethod">
+                            <div>
+                                <strong>Credit card</strong>
+                                <span>Secure card payment after order confirmation.</span>
                             </div>
-                        </nb-radio-group>
+                        </label>
                     </div>
-                </nb-card-body>
-            </nb-card>
-        </div>
+                </section>
+            </div>
 
-        <div class="cart-summary-wrapper">
-            <nb-card class="cart-summary">
-                <nb-card-header>
-                    <h2>Order Summary</h2>
-                </nb-card-header>
-                <nb-card-body>
-                    <div class="summary-line">
-                        <span>Subtotal ({{ cartItems.length }} items)</span>
-                        <span class="summary-value">PKR {{ subtotal | number }}</span>
-                    </div>
+            <aside class="summary-card">
+                <div class="card-heading">
+                    <span>Checkout</span>
+                    <h2>Order summary</h2>
+                </div>
 
-                    <div class="summary-line">
-                        <span>Shipping Fee</span>
-                        <span class="summary-value">PKR {{ shippingFee | number }}</span>
-                    </div>
+                <div class="summary-line">
+                    <span>Subtotal ({{ cartItems.length }} items)</span>
+                    <strong>PKR {{ subtotal | number }}</strong>
+                </div>
+                <div class="summary-line">
+                    <span>Shipping fee</span>
+                    <strong>PKR {{ shippingFee | number }}</strong>
+                </div>
+                <div class="summary-line discount">
+                    <span>Voucher applied</span>
+                    <strong>-PKR {{ discount | number }}</strong>
+                </div>
 
-                    <div class="summary-line discount">
-                        <span>Voucher Applied</span>
-                        <span class="summary-value">-PKR {{ discount | number }}</span>
-                    </div>
+                <div class="total-line">
+                    <span>Total</span>
+                    <strong>PKR {{ (grantTotal || (subtotal + shippingFee - discount)) | number }}</strong>
+                </div>
 
-                    <div class="total-line">
-                        <h3>Total</h3>
-                        <span class="total-value">PKR {{ grantTotal | number }}</span>
-                    </div>
+                <div *ngIf="error" class="error-message">{{ error }}</div>
 
-                    <div *ngIf="error" class="error-message">{{ error }}</div>
+                <button class="checkout-btn" type="button" (click)="proceedToCheckout()" [disabled]="loading">
+                    {{ loading ? 'Processing...' : 'Proceed to checkout' }}
+                </button>
 
-                    <button nbButton fullWidth status="warning" size="large" class="checkout-btn"
-                        (click)="proceedToCheckout()" [disabled]="loading">
-                        {{ loading ? 'Processing...' : 'PROCEED TO CHECKOUT' }}
-                    </button>
-
-                    <div class="accepted-payment">
-                        <p>We accept:</p>
-                        <div class="payment-icons">
-                            <nb-icon icon="credit-card-outline" pack="eva"></nb-icon>
-                            <nb-icon icon="browser-outline" pack="eva"></nb-icon>
-                        </div>
-                    </div>
-                </nb-card-body>
-            </nb-card>
+                <div class="payment-note">
+                    <strong>Secure checkout</strong>
+                    <span>Card and cash-on-delivery options available.</span>
+                </div>
+            </aside>
         </div>
     </div>
-
-</div>
+</section>

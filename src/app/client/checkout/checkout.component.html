@@ -1,14 +1,61 @@
-<h2>Checkout</h2>
+<section class="checkout-page">
+    <div class="container-xl">
+        <div class="checkout-shell">
+            <div class="payment-card">
+                <div class="checkout-heading">
+                    <span>Secure payment</span>
+                    <h1>Complete your order</h1>
+                    <p>Enter your card details below. Your payment is processed securely through Stripe.</p>
+                </div>
 
-<div id="card-element" class="stripe-card"></div>
+                <div class="order-strip">
+                    <div>
+                        <span>Order ID</span>
+                        <strong>{{ orderId || 'Pending' }}</strong>
+                    </div>
+                    <div>
+                        <span>Amount</span>
+                        <strong>PKR {{ (amount || 0) | number }}</strong>
+                    </div>
+                </div>
 
-<button (click)="pay()" class="btn btn-primary">Pay Now</button>
+                <div class="stripe-section">
+                    <label>Card information</label>
+                    <div id="card-element" class="stripe-card"></div>
+                </div>
 
-<style>
-    .stripe-card {
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        margin-bottom: 15px;
-    }
-</style>
+                <button class="pay-btn" type="button" (click)="pay()">Pay now</button>
+
+                <div class="security-note">
+                    <strong>Encrypted checkout</strong>
+                    <span>Your card details are handled by Stripe and are not stored by ShopSphere.</span>
+                </div>
+            </div>
+
+            <aside class="checkout-side">
+                <a class="brand-pill" routerLink="/public">ShopSphere</a>
+
+                <div class="side-copy">
+                    <span>Almost done</span>
+                    <h2>Your items are ready.</h2>
+                    <p>Once payment succeeds, your order moves into processing and you can track it from your account.</p>
+                </div>
+
+                <div class="checkout-benefits">
+                    <div>
+                        <strong>Protected</strong>
+                        <span>Secure card processing</span>
+                    </div>
+                    <div>
+                        <strong>Fast</strong>
+                        <span>Quick order confirmation</span>
+                    </div>
+                    <div>
+                        <strong>Simple</strong>
+                        <span>One final payment step</span>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>

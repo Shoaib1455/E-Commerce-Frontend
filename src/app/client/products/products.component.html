@@ -1,95 +1,137 @@
-<div class="product-page" *ngIf="product; else empty">
-    <div class="product-top">
-        <div class="left-col">
-            <div class="image-wrap">
-                <img [src]="product.imageUrl" alt="{{product?.name}}" class="main-image" />
-            </div>
-            <div class="thumbs">
-                
-                <button nbButton ghost *ngFor="let img of images; let i = index" (click)="selectImage(i)"
-                    [class.active]="i === selectedImageIndex">
-                    <img [src]="img" alt="thumb-{{i}}" />
-                </button>
-            </div>
-        </div>
+<section class="product-detail-page" *ngIf="product; else empty">
+    <div class="container-xl">
+        <nav class="breadcrumb-row" aria-label="Product breadcrumb">
+            <a routerLink="/public">Home</a>
+            <span>/</span>
+            <a routerLink="/public">Products</a>
+            <span>/</span>
+            <strong>{{ product?.name || 'Product details' }}</strong>
+        </nav>
 
-        <div class="right-col">
-            <h2 class="product-title">{{ product?.name || 'Product Name' }}</h2>
-            <div class="price">{{ product?.price ? ('$' + (product.price | number:'1.2-2')) : 'Price unavailable' }}
-            </div>
-
-            <div class="actions">
-                <div class="input-fullWidth">
-                    <input nbInput type="number" min="1" [(ngModel)]="quantity" />
+        <div class="product-hero">
+            <div class="gallery-panel">
+                <div class="badge-row">
+                    <span class="deal-badge">Featured deal</span>
+                    <span class="stock-badge">In stock</span>
                 </div>
-                <button nbButton status="primary" (click)="addToCart()">Add to cart</button>
+
+                <div class="image-wrap">
+                    <img [src]="images.length ? currentImage : product.imageUrl" [alt]="product?.name || 'Product image'"
+                        class="main-image" />
+                </div>
+
+                <div class="thumbs" *ngIf="images.length">
+                    <button type="button" *ngFor="let img of images; let i = index" (click)="selectImage(i)"
+                        [class.active]="i === selectedImageIndex" [attr.aria-label]="'View image ' + (i + 1)">
+                        <img [src]="img" [alt]="'Product thumbnail ' + (i + 1)" />
+                    </button>
+                </div>
             </div>
 
-            <div class="delivery">
-                <h4>Delivery options</h4>
-                <ul>
-                    <li *ngFor="let d of deliveryOptions">{{ d }}</li>
-                </ul>
-            </div>
+            <aside class="details-panel">
+                <span class="eyebrow">ShopSphere selected</span>
+                <h1 class="product-title">{{ product?.name || 'Product Name' }}</h1>
+
+                <div class="rating-line">
+                    <span class="rating-pill">4.8 rating</span>
+                    <span>120+ orders</span>
+                    <span>Fast dispatch</span>
+                </div>
+
+                <div class="price-card">
+                    <span>Today&apos;s price</span>
+                    <strong>{{ product?.price ? ('PKR ' + (product.price | number:'1.0-0')) : 'Price unavailable' }}</strong>
+                    <small>Inclusive of available store discounts.</small>
+                </div>
+
+                <div class="purchase-box">
+                    <label for="quantity">Quantity</label>
+                    <div class="purchase-actions">
+                        <input id="quantity" class="form-control quantity-input" type="number" min="1"
+                            [(ngModel)]="quantity" />
+                        <button class="theme-submit" type="button" (click)="addToCart()">Add to cart</button>
+                    </div>
+                </div>
+
+                <div class="delivery-card">
+                    <h2>Delivery options</h2>
+                    <ul>
+                        <li *ngFor="let d of deliveryOptions">{{ d }}</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+
+        <div class="product-body">
+            <section class="content-card description-card">
+                <div class="section-heading">
+                    <span>Product information</span>
+                    <h2>Description</h2>
+                </div>
+                <div class="description-content" [innerHTML]="product?.description || 'No description available.'">
+                </div>
+            </section>
+
+            <section class="content-card reviews-card">
+                <div class="section-heading">
+                    <span>Customer feedback</span>
+                    <h2>Reviews ({{ reviews.length }})</h2>
+                </div>
+
+                <div class="empty-review" *ngIf="reviews.length === 0">
+                    No reviews yet. Be the first to review this product.
+                </div>
+
+                <div class="review" *ngFor="let r of reviews">
+                    <div class="review-head">
+                        <strong>{{ r.author || 'Anonymous' }}</strong>
+                        <span>{{ r.rating || 0 }} / 5</span>
+                    </div>
+                    <div class="review-body">{{ r.comment }}</div>
+                </div>
+
+                <div class="add-review">
+                    <label for="reviewText">Write a review</label>
+                    <textarea id="reviewText" class="form-control" placeholder="Share a short review"
+                        [(ngModel)]="newReviewText"></textarea>
+                    <button class="theme-outline" type="button" (click)="submitReview()">Submit review</button>
+                </div>
+            </section>
+
+            <section class="content-card related-card">
+                <div class="section-heading">
+                    <span>More to explore</span>
+                    <h2>Related products</h2>
+                </div>
+
+                <div class="related-carousel" *ngIf="relatedProducts.length; else noRelated">
+                    <article class="related-item" *ngFor="let rp of relatedProducts">
+                        <img [src]="rpImage(rp)" [alt]="rp?.name || 'Related product'" />
+                        <div class="rp-info">
+                            <div class="rp-name">{{ rp?.name }}</div>
+                            <div class="rp-price">{{ rp?.price ? ('PKR ' + (rp.price | number)) : '' }}</div>
+                        </div>
+                        <button class="view-related" type="button" (click)="openRelated(rp)">View</button>
+                    </article>
+                </div>
+
+                <ng-template #noRelated>
+                    <div class="empty-related">Related products will appear here when available.</div>
+                </ng-template>
+            </section>
         </div>
     </div>
-
-    <div class="product-body">
-        <section class="description nb-card">
-            <nb-card>
-                <nb-card-header>Product Description</nb-card-header>
-                <nb-card-body>
-                    <div [innerHTML]="product?.description || 'No description available.'"></div>
-                </nb-card-body>
-            </nb-card>
-        </section>
-
-        <section class="reviews nb-card">
-            <nb-card>
-                <nb-card-header>Customer Reviews ({{reviews.length}})</nb-card-header>
-                <nb-card-body>
-                    <div *ngIf="reviews.length === 0">No reviews yet — be the first to review this product.</div>
-                    <div class="review" *ngFor="let r of reviews">
-                        <div class="review-head">
-                            <strong>{{ r.author || 'Anonymous' }}</strong>
-                            <span class="rating">{{ r.rating || 0 }} / 5</span>
-                        </div>
-                        <div class="review-body">{{ r.comment }}</div>
-                    </div>
-                    <div class="add-review">
-                        <textarea nbInput placeholder="Write a short review" [(ngModel)]="newReviewText"></textarea>
-                        <div class="review-actions">
-                            <button nbButton status="primary" (click)="submitReview()">Submit Review</button>
-                        </div>
-                    </div>
-                </nb-card-body>
-            </nb-card>
-        </section>
-
-        <section class="related nb-card">
-            <nb-card>
-                <nb-card-header>Related Products</nb-card-header>
-                <nb-card-body>
-                    <div class="related-carousel">
-                        <nb-card class="related-item" *ngFor="let rp of relatedProducts">
-                            <img [src]="rpImage(rp)" alt="{{rp?.name}}" />
-                            <div class="rp-info">
-                                <div class="rp-name">{{ rp?.name }}</div>
-                                <div class="rp-price">{{ rp?.price ? ('$' + rp.price) : '' }}</div>
-                            </div>
-                            <button nbButton ghost size="small" (click)="openRelated(rp)">View</button>
-                        </nb-card>
-                    </div>
-                </nb-card-body>
-            </nb-card>
-        </section>
-    </div>
-</div>
+</section>
 
 <ng-template #empty>
-    <nb-card>
-        <nb-card-body>
-            <div class="empty">No product selected. Click a product to view details.</div>
-        </nb-card-body>
-    </nb-card>
+    <section class="product-detail-page">
+        <div class="container-xl">
+            <div class="empty-state">
+                <span>Product details</span>
+                <h1>No product selected</h1>
+                <p>Open a product from the store to see its details here.</p>
+                <a class="theme-submit empty-link" routerLink="/public">Back to store</a>
+            </div>
+        </div>
+    </section>
 </ng-template>
