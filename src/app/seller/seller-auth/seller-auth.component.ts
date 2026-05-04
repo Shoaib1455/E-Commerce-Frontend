@@ -25,7 +25,7 @@ export class SellerAuthComponent {
                 console.log("information send successfully");
                 var token = res.body.token
                 localStorage.setItem('authToken', token);
-                this.router.navigate(['/add-product']);
+                this.router.navigate(['/seller-dashboard']);
 
 
             },

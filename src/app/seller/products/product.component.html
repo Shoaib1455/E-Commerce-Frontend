@@ -1,117 +1,105 @@
-<nb-layout>
-    <nb-layout-column>
-        <div class="container mt-4">
-            <nb-card class="shadow-sm rounded-3">
-                <nb-card-header class="bg-light">
-                    <h5 class="mb-0 text-primary fw-semibold">Add New Product</h5>
-                </nb-card-header>
-
-                <nb-card-body>
-                    <form (ngSubmit)="onSubmit()" #productForm="ngForm" class="row g-3">
-
-                        <!-- Product Name -->
-                        <div class="col-md-6">
-                            <label for="productName" class="form-label fw-medium">Product Name</label>
-                            <input nbInput fullWidth type="text" id="productName" name="productName"
-                                class="form-control" placeholder="Enter product name" [(ngModel)]="product.Name"
-                                required />
-                        </div>
-
-                        <!-- Price -->
-                        <div class="col-md-6">
-                            <label for="price" class="form-label fw-medium">Price (PKR)</label>
-                            <input nbInput fullWidth type="number" id="price" name="price" class="form-control"
-                                placeholder="Enter price" [(ngModel)]="product.price" required />
-                        </div>
-
-                        <!-- Category -->
-                        <div class="col-md-6">
-                            <label for="category" class="form-label fw-medium">Category</label>
-                            <select nbInput fullWidth id="category" name="category" class="form-select"
-                                [(ngModel)]="product.categoryName" required>
-                                <option value="" disabled selected>Select category</option>
-                                <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
-                            </select>
-                        </div>
-
-                        <!-- Stock Quantity -->
-                        <div class="col-md-6">
-                            <label for="sku" class="form-label fw-medium">Product Sku</label>
-                            <input nbInput fullWidth type="text" id="sku" name="sku" class="form-control"
-                                placeholder="Enter product SKU" [(ngModel)]="product.sku" required />
-                        </div>
-                        <div class="col-md-6">
-                            <label for="stock" class="form-label fw-medium">Product Quantity</label>
-                            <input nbInput fullWidth type="number" id="stock" name="stock" class="form-control"
-                                placeholder="Product intial quantity" [(ngModel)]="product.Quantity" required />
-                        </div>
-
-                        <!-- Description -->
-                        <div class="col-12">
-                            <label for="description" class="form-label fw-medium">Description</label>
-                            <textarea nbInput fullWidth id="description" name="description" class="form-control"
-                                rows="3" placeholder="Enter product description"
-                                [(ngModel)]="product.description"></textarea>
-                        </div>
-
-                        <!-- Image Upload -->
-                        <div class="col-md-6">
-                            <label class="form-label fw-medium">Product Image</label>
-                            <input type="file" accept="image/*" class="form-control"
-                                (change)="onFileSelected($event)" />
-                        </div>
-
-                        <!-- Image Preview -->
-                        <div class="col-md-6 text-center" *ngIf="imagePreview">
-                            <label class="form-label fw-medium">Preview</label>
-                            <div class="border rounded-3 p-2">
-                                <img [src]="imagePreview" alt="Preview" class="img-fluid rounded-3"
-                                    style="max-height: 150px;" />
-                            </div>
-                        </div>
-
-                        <!-- Multiple Images Upload -->
-                        <div class="col-12">
-                            <label class="form-label fw-medium">Product Images (Multiple)</label>
-                            <input type="file" accept="image/*" multiple class="form-control"
-                                (change)="onMultipleFilesSelected($event)" />
-                            <small class="text-muted">You can select one or more images</small>
-                        </div>
-
-                        <!-- Multiple Image Previews -->
-                        <div class="col-12" *ngIf="imagePreviews.length > 0">
-                            <label class="form-label fw-medium">Previews</label>
-                            <div class="row g-3">
-                                <div class="col-md-3" *ngFor="let preview of imagePreviews; let i = index">
-                                    <div class="border rounded-3 p-2 position-relative">
-                                        <img [src]="preview" alt="Preview {{ i + 1 }}" class="img-fluid rounded-3"
-                                            style="max-height: 150px; width: 100%;" />
-                                        <button type="button" nbButton status="danger" size="small"
-                                            class="position-absolute top-0 end-0 m-2"
-                                            (click)="removeImage(i)"
-                                            style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
-                                            <nb-icon icon="trash-2-outline"></nb-icon>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Buttons -->
-                        <div class="col-12 text-end mt-3">
-                            <button nbButton status="primary" type="submit" [disabled]="!productForm.valid">
-                                <nb-icon icon="plus-circle-outline"></nb-icon>
-                                Add Product
-                            </button>
-                            <button nbButton status="basic" type="button" class="ms-2" (click)="onCancel()">
-                                Cancel
-                            </button>
-                        </div>
-                    </form>
-                </nb-card-body>
-            </nb-card>
+<section class="product-editor-page">
+    <div class="container-xl">
+        <div class="editor-header">
+            <div>
+                <span>Product management</span>
+                <h1>Add a new product</h1>
+                <p>Create a customer-ready listing with strong images, clear pricing, and useful stock details.</p>
+            </div>
+            <a class="dashboard-link" routerLink="/seller-dashboard">Back to dashboard</a>
         </div>
-    </nb-layout-column>
 
-</nb-layout>
-<router-outlet></router-outlet>
+        <form (ngSubmit)="onSubmit()" #productForm="ngForm" class="editor-layout">
+            <section class="editor-card">
+                <div class="card-heading">
+                    <span>Listing details</span>
+                    <h2>Product information</h2>
+                </div>
+
+                <div class="form-grid">
+                    <div class="field">
+                        <label for="productName">Product name</label>
+                        <input class="form-control" type="text" id="productName" name="productName"
+                            placeholder="Enter product name" [(ngModel)]="product.Name" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="price">Price (PKR)</label>
+                        <input class="form-control" type="number" id="price" name="price" placeholder="Enter price"
+                            [(ngModel)]="product.price" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="category">Category</label>
+                        <select class="form-select" id="category" name="category" [(ngModel)]="product.categoryName"
+                            required>
+                            <option value="" disabled selected>Select category</option>
+                            <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="sku">Product SKU</label>
+                        <input class="form-control" type="text" id="sku" name="sku" placeholder="Enter product SKU"
+                            [(ngModel)]="product.sku" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="stock">Product quantity</label>
+                        <input class="form-control" type="number" id="stock" name="stock"
+                            placeholder="Initial quantity" [(ngModel)]="product.Quantity" required>
+                    </div>
+
+                    <div class="field full-row">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="5"
+                            placeholder="Describe the product, features, materials, and usage"
+                            [(ngModel)]="product.description"></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <aside class="editor-side">
+                <section class="editor-card">
+                    <div class="card-heading">
+                        <span>Images</span>
+                        <h2>Product media</h2>
+                    </div>
+
+                    <div class="upload-box">
+                        <label>Thumbnail image</label>
+                        <input type="file" accept="image/*" class="form-control" (change)="onFileSelected($event)">
+                    </div>
+
+                    <div class="image-preview" *ngIf="imagePreview">
+                        <img [src]="imagePreview" alt="Product thumbnail preview">
+                    </div>
+
+                    <div class="upload-box">
+                        <label>Gallery images</label>
+                        <input type="file" accept="image/*" multiple class="form-control"
+                            (change)="onMultipleFilesSelected($event)">
+                        <small>You can select one or more images.</small>
+                    </div>
+
+                    <div class="gallery-preview" *ngIf="imagePreviews.length > 0">
+                        <div class="gallery-item" *ngFor="let preview of imagePreviews; let i = index">
+                            <img [src]="preview" alt="Product gallery preview">
+                            <button type="button" (click)="removeImage(i)">Remove</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="editor-card publish-card">
+                    <div class="card-heading">
+                        <span>Publish</span>
+                        <h2>Ready to list?</h2>
+                    </div>
+                    <p>Check your product title, price, images, and stock before publishing it to the store.</p>
+                    <button class="primary-action" type="submit" [disabled]="!productForm.valid">Add product</button>
+                    <button class="secondary-action" type="button" (click)="onCancel()">Clear form</button>
+                </section>
+            </aside>
+        </form>
+    </div>
+</section>

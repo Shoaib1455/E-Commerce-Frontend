@@ -1,0 +1,156 @@
+<section class="seller-dashboard">
+    <aside class="dashboard-sidebar">
+        <a class="brand-pill" routerLink="/public">ShopSphere</a>
+
+        <nav class="seller-nav" aria-label="Seller dashboard navigation">
+            <a href="#seller-overview">Dashboard</a>
+            <a routerLink="/seller-products">Products</a>
+            <a routerLink="/seller-orders">Orders</a>
+            <a href="#seller-storefront">Storefront</a>
+            <a href="#seller-marketing">Marketing</a>
+            <a href="#seller-settings">Settings</a>
+        </nav>
+
+        <div class="seller-profile">
+            <span>Seller workspace</span>
+            <strong>Store Manager</strong>
+            <small>Professional seller tools</small>
+        </div>
+
+        <button class="logout-button" type="button" (click)="logout()">Logout</button>
+    </aside>
+
+    <main class="dashboard-main">
+        <header class="dashboard-hero" id="seller-overview">
+            <div>
+                <span>Seller dashboard</span>
+                <h1>Manage your store like a real brand.</h1>
+                <p>Track store health, improve your storefront, manage orders, and keep products ready for customers.</p>
+            </div>
+
+            <div class="hero-actions">
+                <a class="primary-action" routerLink="/add-product">Add product</a>
+                <a class="secondary-action" routerLink="/public">View store</a>
+            </div>
+        </header>
+
+        <section class="metric-grid">
+            <article class="metric-card" *ngFor="let metric of metrics">
+                <span>{{ metric.label }}</span>
+                <strong>{{ metric.value }}</strong>
+                <small>{{ metric.note }}</small>
+            </article>
+        </section>
+
+        <section class="dashboard-grid">
+            <article class="dashboard-card large-card" id="seller-products">
+                <div class="card-heading">
+                    <span>Product management</span>
+                    <h2>Keep your catalog sharp</h2>
+                </div>
+
+                <div class="action-list">
+                    <a routerLink="/add-product">
+                        <strong>Add new product</strong>
+                        <span>Create listings with images, pricing, stock, and category details.</span>
+                    </a>
+                    <a href="#seller-products">
+                        <strong>Manage inventory</strong>
+                        <span>Review stock, update quantity, and identify products needing attention.</span>
+                    </a>
+                    <a href="#seller-products">
+                        <strong>Product quality checklist</strong>
+                        <span>Improve titles, descriptions, images, and price presentation.</span>
+                    </a>
+                </div>
+            </article>
+
+            <article class="dashboard-card" id="seller-orders">
+                <div class="card-heading">
+                    <span>Orders</span>
+                    <h2>Fulfilment queue</h2>
+                </div>
+
+                <div class="order-list">
+                    <div>
+                        <strong>Pending</strong>
+                        <span>86 orders</span>
+                    </div>
+                    <div>
+                        <strong>Ready to ship</strong>
+                        <span>34 packages</span>
+                    </div>
+                    <div>
+                        <strong>Returns</strong>
+                        <span>5 requests</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="dashboard-card" id="seller-storefront">
+                <div class="card-heading">
+                    <span>Storefront</span>
+                    <h2>Customer-facing polish</h2>
+                </div>
+
+                <div class="store-preview">
+                    <div class="preview-banner">Weekend sale</div>
+                    <div>
+                        <strong>Featured categories</strong>
+                        <span>Electronics, Home, Fashion</span>
+                    </div>
+                </div>
+
+                <button class="panel-button" type="button">Customize storefront</button>
+            </article>
+
+            <article class="dashboard-card" id="seller-marketing">
+                <div class="card-heading">
+                    <span>Marketing</span>
+                    <h2>Campaign tools</h2>
+                </div>
+
+                <div class="campaign-stack">
+                    <div>
+                        <strong>Flash sale</strong>
+                        <span>Schedule limited-time offers.</span>
+                    </div>
+                    <div>
+                        <strong>Vouchers</strong>
+                        <span>Create discounts for repeat buyers.</span>
+                    </div>
+                    <div>
+                        <strong>Featured products</strong>
+                        <span>Choose what appears first on your store.</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="dashboard-card tasks-card">
+                <div class="card-heading">
+                    <span>Today</span>
+                    <h2>Priority tasks</h2>
+                </div>
+
+                <label class="task-item" *ngFor="let task of tasks">
+                    <input class="form-check-input" type="checkbox">
+                    <span>{{ task }}</span>
+                </label>
+            </article>
+
+            <article class="dashboard-card" id="seller-settings">
+                <div class="card-heading">
+                    <span>Settings</span>
+                    <h2>Store controls</h2>
+                </div>
+
+                <div class="settings-list">
+                    <button type="button">Store profile</button>
+                    <button type="button">Shipping rules</button>
+                    <button type="button">Payment setup</button>
+                    <button type="button">Team access</button>
+                </div>
+            </article>
+        </section>
+    </main>
+</section>

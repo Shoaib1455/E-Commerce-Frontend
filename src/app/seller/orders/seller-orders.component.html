@@ -1,0 +1,107 @@
+<section class="seller-page">
+    <aside class="seller-sidebar">
+        <a class="brand-pill" routerLink="/public">ShopSphere</a>
+        <nav class="seller-nav">
+            <a routerLink="/seller-dashboard">Dashboard</a>
+            <a routerLink="/seller-products">Products</a>
+            <a class="active" routerLink="/seller-orders">Orders</a>
+            <a routerLink="/seller-dashboard" fragment="seller-storefront">Storefront</a>
+            <a routerLink="/seller-dashboard" fragment="seller-marketing">Marketing</a>
+            <a routerLink="/seller-dashboard" fragment="seller-settings">Settings</a>
+        </nav>
+        <button class="logout-button" type="button" (click)="logout()">Logout</button>
+    </aside>
+
+    <main class="seller-main">
+        <header class="page-hero">
+            <div>
+                <span>Orders</span>
+                <h1>Order management</h1>
+                <p>Track fulfilment, shipment readiness, customer orders, and return requests from one queue.</p>
+            </div>
+            <button class="primary-action" type="button">Export orders</button>
+        </header>
+
+        <section class="order-status-grid">
+            <article>
+                <span>Processing</span>
+                <strong>86</strong>
+                <small>Needs fulfilment</small>
+            </article>
+            <article>
+                <span>Ready to ship</span>
+                <strong>34</strong>
+                <small>Awaiting courier</small>
+            </article>
+            <article>
+                <span>Shipped</span>
+                <strong>214</strong>
+                <small>This month</small>
+            </article>
+            <article>
+                <span>Returns</span>
+                <strong>5</strong>
+                <small>Open requests</small>
+            </article>
+        </section>
+
+        <section class="toolbar-card">
+            <input class="form-control" type="search" placeholder="Search by order ID or customer">
+            <select class="form-select">
+                <option>All statuses</option>
+                <option>Processing</option>
+                <option>Ready to ship</option>
+                <option>Shipped</option>
+                <option>Return requested</option>
+            </select>
+            <select class="form-select">
+                <option>Newest first</option>
+                <option>Oldest first</option>
+                <option>Highest total</option>
+            </select>
+        </section>
+
+        <section class="table-card">
+            <div class="card-heading">
+                <span>Fulfilment</span>
+                <h2>Recent orders</h2>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table align-middle">
+                    <thead>
+                        <tr>
+                            <th>Order</th>
+                            <th>Customer</th>
+                            <th>Items</th>
+                            <th>Total</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let order of orders">
+                            <td><strong>{{ order.id }}</strong></td>
+                            <td>{{ order.customer }}</td>
+                            <td>{{ order.items }}</td>
+                            <td>PKR {{ order.total | number }}</td>
+                            <td>{{ order.date }}</td>
+                            <td>
+                                <span class="status-pill" [class.warning]="order.status === 'Processing'"
+                                    [class.info]="order.status === 'Ready to ship'"
+                                    [class.danger]="order.status === 'Return requested'">
+                                    {{ order.status }}
+                                </span>
+                            </td>
+                            <td class="text-end">
+                                <button class="table-action" type="button">Details</button>
+                                <button class="table-action dark" type="button">Update</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</section>

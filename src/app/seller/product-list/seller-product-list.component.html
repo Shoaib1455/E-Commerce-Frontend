@@ -1,0 +1,87 @@
+<section class="seller-page">
+    <aside class="seller-sidebar">
+        <a class="brand-pill" routerLink="/public">ShopSphere</a>
+        <nav class="seller-nav">
+            <a routerLink="/seller-dashboard">Dashboard</a>
+            <a class="active" routerLink="/seller-products">Products</a>
+            <a routerLink="/seller-orders">Orders</a>
+            <a routerLink="/seller-dashboard" fragment="seller-storefront">Storefront</a>
+            <a routerLink="/seller-dashboard" fragment="seller-marketing">Marketing</a>
+            <a routerLink="/seller-dashboard" fragment="seller-settings">Settings</a>
+        </nav>
+        <button class="logout-button" type="button" (click)="logout()">Logout</button>
+    </aside>
+
+    <main class="seller-main">
+        <header class="page-hero">
+            <div>
+                <span>Products</span>
+                <h1>Product catalog</h1>
+                <p>Review listings, stock health, pricing, and product visibility from one organized page.</p>
+            </div>
+            <a class="primary-action" routerLink="/add-product">Add product</a>
+        </header>
+
+        <section class="toolbar-card">
+            <input class="form-control" type="search" placeholder="Search products by name, SKU, or category">
+            <select class="form-select">
+                <option>All categories</option>
+                <option>Electronics</option>
+                <option>Fashion</option>
+                <option>Home</option>
+                <option>Sports</option>
+            </select>
+            <select class="form-select">
+                <option>All statuses</option>
+                <option>Active</option>
+                <option>Low stock</option>
+                <option>Out of stock</option>
+            </select>
+        </section>
+
+        <section class="table-card">
+            <div class="card-heading">
+                <span>Inventory</span>
+                <h2>Seller products</h2>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table align-middle">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>SKU</th>
+                            <th>Category</th>
+                            <th>Stock</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of products">
+                            <td>
+                                <strong>{{ product.name }}</strong>
+                                <small>Customer-facing listing</small>
+                            </td>
+                            <td>{{ product.sku }}</td>
+                            <td>{{ product.category }}</td>
+                            <td>{{ product.stock }}</td>
+                            <td>PKR {{ product.price | number }}</td>
+                            <td>
+                                <span class="status-pill" [class.warning]="product.status === 'Low stock'"
+                                    [class.danger]="product.status === 'Out of stock'">
+                                    {{ product.status }}
+                                </span>
+                            </td>
+                            <td class="text-end">
+                                <button class="table-action" type="button">Edit</button>
+                                <button class="table-action dark" type="button">Preview</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</section>
