@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { SellerOrdersService } from './seller-orders.service';
 
 @Component({
     selector: 'app-seller-orders',
@@ -14,8 +15,28 @@ export class SellerOrdersComponent {
         { id: 'ORD-1034', customer: 'Bilal Raza', items: 4, total: 22900, status: 'Return requested', date: 'Apr 30' }
     ];
 
-    constructor(private router: Router) { }
-
+    constructor(private router: Router ,private sellerOrdersService: SellerOrdersService) { }
+ngOnInit(): void {
+        this.ordersdata();
+    }
+    ordersdata(){
+        this.sellerOrdersService.OrdersData().subscribe({
+            next:(res)=>{
+                console.log("orders data:",res.$values);
+                this.orders = res.body.$values.map((order: any) => ({
+                    id: order.id,
+                    customer: "ordercustomerName",
+                    items: order.quantity,
+                    total: order.TotalPrice,
+                    status: "orderstatus",
+                    date: "Today"
+                }));
+            },
+            error:(err)=>{
+                console.log("orders data error:",err)
+            }
+        })
+    }
     logout(): void {
         localStorage.removeItem('authToken');
         localStorage.removeItem('token');

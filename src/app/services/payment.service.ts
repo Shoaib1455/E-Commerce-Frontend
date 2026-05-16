@@ -22,7 +22,7 @@ export class PaymentService {
 
         return this.http.post<{ clientSecret: string }>(
             `${this.baseUrl}`,
-            {  orderId },
+            { orderId },
             { headers }
         );
     }
