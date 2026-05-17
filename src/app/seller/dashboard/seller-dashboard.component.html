@@ -3,7 +3,7 @@
         <a class="brand-pill" routerLink="/public">ShopSphere</a>
 
         <nav class="seller-nav" aria-label="Seller dashboard navigation">
-            <a href="#seller-overview">Dashboard</a>
+            <a class="active" href="#seller-overview">Dashboard</a>
             <a routerLink="/seller-products">Products</a>
             <a routerLink="/seller-orders">Orders</a>
             <a href="#seller-storefront">Storefront</a>
@@ -21,107 +21,103 @@
     </aside>
 
     <main class="dashboard-main">
-        <header class="dashboard-hero" id="seller-overview">
+        <header class="topbar">
             <div>
-                <span>Seller dashboard</span>
-                <h1>Manage your store like a real brand.</h1>
-                <p>Track store health, improve your storefront, manage orders, and keep products ready for customers.</p>
+                <span>Good afternoon</span>
+                <h1>Seller command center</h1>
             </div>
-
-            <div class="hero-actions">
-                <a class="primary-action" routerLink="/add-product">Add product</a>
+            <div class="topbar-actions">
                 <a class="secondary-action" routerLink="/public">View store</a>
+                <a class="primary-action" routerLink="/add-product">Add product</a>
             </div>
         </header>
 
+        <section class="dashboard-hero" id="seller-overview">
+            <div class="hero-copy">
+                <span>Store performance</span>
+                <h2>Today is strong. Keep fulfilment tight and push your best listings.</h2>
+                <p>Revenue is trending up, but low-stock items and pending orders need attention before they start hurting the customer experience.</p>
+            </div>
+
+            <div class="hero-score">
+                <span>Store health</span>
+                <strong>88%</strong>
+                <small>Healthy, with a few fixes recommended</small>
+            </div>
+        </section>
+
         <section class="metric-grid">
             <article class="metric-card" *ngFor="let metric of metrics">
-                <span>{{ metric.label }}</span>
+                <div class="metric-top">
+                    <span>{{ metric.label }}</span>
+                    <small [class.steady]="metric.trend === 'steady'">{{ metric.trend }}</small>
+                </div>
                 <strong>{{ metric.value }}</strong>
-                <small>{{ metric.note }}</small>
+                <p>{{ metric.note }}</p>
             </article>
         </section>
 
         <section class="dashboard-grid">
-            <article class="dashboard-card large-card" id="seller-products">
+            <article class="dashboard-card revenue-card">
                 <div class="card-heading">
-                    <span>Product management</span>
-                    <h2>Keep your catalog sharp</h2>
+                    <span>Revenue</span>
+                    <h2>Weekly sales trend</h2>
                 </div>
 
-                <div class="action-list">
-                    <a routerLink="/add-product">
-                        <strong>Add new product</strong>
-                        <span>Create listings with images, pricing, stock, and category details.</span>
-                    </a>
-                    <a href="#seller-products">
-                        <strong>Manage inventory</strong>
-                        <span>Review stock, update quantity, and identify products needing attention.</span>
-                    </a>
-                    <a href="#seller-products">
-                        <strong>Product quality checklist</strong>
-                        <span>Improve titles, descriptions, images, and price presentation.</span>
-                    </a>
-                </div>
-            </article>
-
-            <article class="dashboard-card" id="seller-orders">
-                <div class="card-heading">
-                    <span>Orders</span>
-                    <h2>Fulfilment queue</h2>
-                </div>
-
-                <div class="order-list">
-                    <div>
-                        <strong>Pending</strong>
-                        <span>86 orders</span>
-                    </div>
-                    <div>
-                        <strong>Ready to ship</strong>
-                        <span>34 packages</span>
-                    </div>
-                    <div>
-                        <strong>Returns</strong>
-                        <span>5 requests</span>
+                <div class="chart-bars">
+                    <div class="bar-column" *ngFor="let bar of revenueBars">
+                        <div class="bar-track">
+                            <span [style.height.%]="bar.value"></span>
+                        </div>
+                        <small>{{ bar.day }}</small>
                     </div>
                 </div>
             </article>
 
-            <article class="dashboard-card" id="seller-storefront">
+            <article class="dashboard-card fulfilment-card" id="seller-orders">
                 <div class="card-heading">
-                    <span>Storefront</span>
-                    <h2>Customer-facing polish</h2>
+                    <span>Fulfilment</span>
+                    <h2>Order queue</h2>
                 </div>
 
-                <div class="store-preview">
-                    <div class="preview-banner">Weekend sale</div>
-                    <div>
-                        <strong>Featured categories</strong>
-                        <span>Electronics, Home, Fashion</span>
-                    </div>
+                <div class="fulfilment-grid">
+                    <a routerLink="/seller-orders" *ngFor="let item of fulfilment" [class]="item.tone">
+                        <strong>{{ item.value }}</strong>
+                        <span>{{ item.label }}</span>
+                    </a>
                 </div>
-
-                <button class="panel-button" type="button">Customize storefront</button>
             </article>
 
-            <article class="dashboard-card" id="seller-marketing">
+            <article class="dashboard-card top-products-card" id="seller-products">
                 <div class="card-heading">
-                    <span>Marketing</span>
-                    <h2>Campaign tools</h2>
+                    <span>Catalog</span>
+                    <h2>Top products</h2>
                 </div>
 
-                <div class="campaign-stack">
+                <div class="product-row" *ngFor="let product of topProducts">
                     <div>
-                        <strong>Flash sale</strong>
-                        <span>Schedule limited-time offers.</span>
+                        <strong>{{ product.name }}</strong>
+                        <span>{{ product.category }} - {{ product.sold }} sold</span>
                     </div>
+                    <b>{{ product.revenue }}</b>
+                </div>
+
+                <a class="panel-link" routerLink="/seller-products">Manage all products</a>
+            </article>
+
+            <article class="dashboard-card health-card">
+                <div class="card-heading">
+                    <span>Quality</span>
+                    <h2>Store health</h2>
+                </div>
+
+                <div class="health-row" *ngFor="let item of storeHealth">
                     <div>
-                        <strong>Vouchers</strong>
-                        <span>Create discounts for repeat buyers.</span>
+                        <strong>{{ item.label }}</strong>
+                        <span>{{ item.value }}%</span>
                     </div>
-                    <div>
-                        <strong>Featured products</strong>
-                        <span>Choose what appears first on your store.</span>
+                    <div class="progress-track">
+                        <span [style.width.%]="item.value"></span>
                     </div>
                 </div>
             </article>
@@ -138,7 +134,44 @@
                 </label>
             </article>
 
-            <article class="dashboard-card" id="seller-settings">
+            <article class="dashboard-card storefront-card" id="seller-storefront">
+                <div class="card-heading">
+                    <span>Storefront</span>
+                    <h2>Customer-facing polish</h2>
+                </div>
+
+                <div class="store-preview">
+                    <div class="preview-banner">
+                        <span>Weekend sale</span>
+                        <strong>Up to 35% off</strong>
+                    </div>
+                    <p>Refresh your banner, featured categories, and product ordering before the next traffic spike.</p>
+                </div>
+            </article>
+
+            <article class="dashboard-card action-card" id="seller-marketing">
+                <div class="card-heading">
+                    <span>Growth</span>
+                    <h2>Recommended actions</h2>
+                </div>
+
+                <div class="action-list">
+                    <a routerLink="/add-product">
+                        <strong>Add a new product</strong>
+                        <span>Fill catalog gaps from recent search demand.</span>
+                    </a>
+                    <a routerLink="/seller-orders">
+                        <strong>Clear pending orders</strong>
+                        <span>Improve delivery score and customer trust.</span>
+                    </a>
+                    <a routerLink="/seller-products">
+                        <strong>Fix low stock items</strong>
+                        <span>Avoid losing sales on top-performing products.</span>
+                    </a>
+                </div>
+            </article>
+
+            <article class="dashboard-card settings-card" id="seller-settings">
                 <div class="card-heading">
                     <span>Settings</span>
                     <h2>Store controls</h2>

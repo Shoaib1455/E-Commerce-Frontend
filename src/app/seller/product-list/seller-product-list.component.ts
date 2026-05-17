@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { SellerProductsService } from './seller-product-list.service';
 
 @Component({
     selector: 'app-seller-product-list',
@@ -14,8 +15,30 @@ export class SellerProductListComponent {
         { name: 'Running Shoes', sku: 'SP-4308', category: 'Sports', stock: 0, price: 9700, status: 'Out of stock' }
     ];
 
-    constructor(private router: Router) { }
-
+    constructor(private router: Router, private sellerProductsService: SellerProductsService) { }
+    ngOnInit(): void {
+        this.productsdata();
+    }
+productsdata(){
+    // Call the service method to fetch products data
+    this.sellerProductsService.ProductsData().subscribe({
+        next:(res)=>{
+            console.log("products data:",res);
+            this.products = res.map((product: any) => ({
+                name: product.name,
+                sku: product.sku,
+                category: product.categoryName,
+                stock: product.quantity,
+                price: product.price,
+                status: product.status
+            }));
+            console.log("mapped products data:",this.products);
+        },
+        error:(err)=>{
+            console.log("products data error:",err)
+        }
+    })
+}
     logout(): void {
         localStorage.removeItem('authToken');
         localStorage.removeItem('token');

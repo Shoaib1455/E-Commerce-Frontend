@@ -15,10 +15,10 @@ export class SellerDashboardComponent implements OnInit {
     }
 
     metrics = [
-        { label: 'Revenue', value: 'PKR 248K', note: '+12.4% this month' },
-        { label: 'Orders', value: '1,284', note: '86 pending fulfilment' },
-        { label: 'Products', value: '342', note: '24 low stock' },
-        { label: 'Store rating', value: '4.8', note: 'Based on recent reviews' }
+        { label: 'Net revenue', value: 'PKR 248K', note: '+12.4% vs last month', trend: 'up' },
+        { label: 'Orders', value: '1,284', note: '86 need fulfilment', trend: 'up' },
+        { label: 'Conversion', value: '7.8%', note: '+1.2% this week', trend: 'up' },
+        { label: 'Store rating', value: '4.8', note: '312 customer reviews', trend: 'steady' }
     ];
 
     tasks = [
@@ -26,6 +26,35 @@ export class SellerDashboardComponent implements OnInit {
         'Add hero banner for weekend sale',
         'Restock 6 best-selling products',
         'Reply to 4 customer questions'
+    ];
+
+    revenueBars = [
+        { day: 'Mon', value: 58 },
+        { day: 'Tue', value: 72 },
+        { day: 'Wed', value: 46 },
+        { day: 'Thu', value: 84 },
+        { day: 'Fri', value: 68 },
+        { day: 'Sat', value: 96 },
+        { day: 'Sun', value: 78 }
+    ];
+
+    topProducts = [
+        { name: 'Wireless Headphones', category: 'Electronics', sold: 248, revenue: 'PKR 91K' },
+        { name: 'Cotton Hoodie', category: 'Fashion', sold: 186, revenue: 'PKR 64K' },
+        { name: 'Dinner Set', category: 'Home', sold: 92, revenue: 'PKR 47K' }
+    ];
+
+    fulfilment = [
+        { label: 'Pending', value: 86, tone: 'warning' },
+        { label: 'Packed', value: 34, tone: 'info' },
+        { label: 'Shipped', value: 214, tone: 'success' },
+        { label: 'Returns', value: 5, tone: 'danger' }
+    ];
+
+    storeHealth = [
+        { label: 'Listing quality', value: 82 },
+        { label: 'Response rate', value: 94 },
+        { label: 'On-time shipping', value: 88 }
     ];
     
 

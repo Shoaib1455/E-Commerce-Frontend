@@ -48,15 +48,56 @@
 </main>
 
 <footer class="store-footer">
-    <div class="container-xl d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
-        <div>
-            <div class="fw-bold">ShopSphere</div>
-            <small>Quality products, simple checkout, fast delivery.</small>
+    <div class="container-xl">
+        <div class="footer-main">
+            <div class="footer-brand">
+                <a class="footer-logo" routerLink="/public">ShopSphere</a>
+                <p>Quality products, simple checkout, and reliable delivery for everyday shopping.</p>
+                <div class="footer-badges">
+                    <span>Secure checkout</span>
+                    <span>Fast delivery</span>
+                    <span>Buyer support</span>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h2>Shop</h2>
+                <a routerLink="/public">New arrivals</a>
+                <a routerLink="/public">Deals</a>
+                <a routerLink="/public">Popular departments</a>
+                <a routerLink="/cart">Cart</a>
+            </div>
+
+            <div class="footer-column">
+                <h2>Customer care</h2>
+                <a routerLink="/public">Help center</a>
+                <a routerLink="/public">Shipping details</a>
+                <a routerLink="/public">Returns & refunds</a>
+                <a routerLink="/public">Order tracking</a>
+            </div>
+
+            <div class="footer-column">
+                <h2>Sell with us</h2>
+                <a routerLink="/seller-login">Seller login</a>
+                <a routerLink="/seller-register">Create seller account</a>
+                <a routerLink="/seller-dashboard">Seller dashboard</a>
+                <a routerLink="/add-product">Add product</a>
+            </div>
+
+            <div class="footer-contact">
+                <h2>Need help?</h2>
+                <p>Our support team can help with orders, payments, delivery, and account questions.</p>
+                <a class="support-button" routerLink="/public">Contact support</a>
+            </div>
         </div>
-        <div class="footer-links d-flex gap-3">
-            <a routerLink="/public">Support</a>
-            <a routerLink="/public">Shipping</a>
-            <a routerLink="/public">Returns</a>
+
+        <div class="footer-bottom">
+            <span>&copy; 2026 ShopSphere. All rights reserved.</span>
+            <div>
+                <a routerLink="/public">Privacy</a>
+                <a routerLink="/public">Terms</a>
+                <a routerLink="/public">Cookies</a>
+            </div>
         </div>
     </div>
 </footer>

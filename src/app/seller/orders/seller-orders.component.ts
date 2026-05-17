@@ -22,15 +22,16 @@ ngOnInit(): void {
     ordersdata(){
         this.sellerOrdersService.OrdersData().subscribe({
             next:(res)=>{
-                console.log("orders data:",res.$values);
-                this.orders = res.body.$values.map((order: any) => ({
-                    id: order.id,
-                    customer: "ordercustomerName",
+                console.log("orders data:",res);
+                this.orders = res.map((order: any) => ({
+                    id: order.orderid,
+                    customer: order.customername,
                     items: order.quantity,
-                    total: order.TotalPrice,
-                    status: "orderstatus",
-                    date: "Today"
+                    total: order.totalprice,
+                    status: order.status,
+                    date: order.createdat
                 }));
+                console.log("mapped orders data:",this.orders);
             },
             error:(err)=>{
                 console.log("orders data error:",err)
